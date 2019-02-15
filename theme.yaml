@@ -1,0 +1,20 @@
+name: fun-wiki
+description: 'front-end theme by fun-wiki site v2'
+author: CRYDEsigN
+homepage: ''
+code: 'fw2'
+
+form:
+    fields:
+        vk:
+            label: VK
+            default: https://vk.com/club70589631
+        facebook:
+            label: Facebook
+            default: https://www.facebook.com/f.universe.wiki
+        twitter:
+            label: Twitter
+            default: https://twitter.com/Cryden_DA
+        googleplus:
+            label: Google+
+            default: https://plus.google.com/communities/103562344691804150752
