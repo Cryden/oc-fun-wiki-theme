@@ -1,0 +1,18 @@
+{
+    "name": "fun-wiki",
+    "version": "1.0.0",
+    "description": "fun-wiki.ru site theme",
+    "main": "index.js",
+    "repository": "https://github.com/Cryden/oc-fun-wiki-theme.git",
+    "author": "CRYDEsigN <Cryden_da@mail.ru>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "build": "webpack --config webpack.config.js"
+    },
+    "devDependencies": {
+        "path": "^0.12.7",
+        "webpack": "^4.29.3",
+        "webpack-cli": "^3.2.3"
+    }
+}
