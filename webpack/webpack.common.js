@@ -1,8 +1,10 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const IconFontPlugin = require('icon-font-loader').Plugin;
 
 const devMode = process.env.NODE_ENV !== 'production'
+
 
 module.exports = {
     entry: './source/index.js',
@@ -21,10 +23,11 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            publicPath: '../css/'
+                            publicPath: '../',
                         }
                     },
                     'css-loader',
+                    'icon-font-loader',
                     'sass-loader'
                 ]
             },
@@ -62,8 +65,14 @@ module.exports = {
             } 
         ),
         new MiniCssExtractPlugin({
-            filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
-            chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
-          })
+                filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
+                chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
+            }
+        ),
+        new IconFontPlugin({
+                filename: 'fonts/[name]/[name].[ext]',
+                publicPath: 'themes/_fun-wiki/assets/',
+            }
+        ),
     ]
 };
