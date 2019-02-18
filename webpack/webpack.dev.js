@@ -13,7 +13,7 @@ module.exports = merge(common, {
                 port: 3000,
                 files: [
                     '**/*.htm',
-                    'assets/**/*.*',
+                    'source/**/*.*',
                     {
                         match: ['assets/css/**/*.css'],
                         fn: function (event, file) {

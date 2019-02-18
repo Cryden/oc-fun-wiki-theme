@@ -56,14 +56,14 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(
-            [
-                path.resolve('assets')
-            ],
-            {
-                root: path.resolve('')
-            } 
-        ),
+        // new CleanWebpackPlugin(
+        //     [
+        //         path.resolve('assets')
+        //     ],
+        //     {
+        //         root: path.resolve('')
+        //     } 
+        // ),
         new MiniCssExtractPlugin({
                 filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
                 chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
