@@ -1,0 +1,11 @@
+{
+  "main.css": "css/main.css",
+  "main.js": "js/main.js",
+  "main.css.map": "css/main.css.map",
+  "main.js.map": "js/main.js.map",
+  "fonts/icon-font/icon-font.eot": "fonts/icon-font/icon-font.eot",
+  "fonts/icon-font/icon-font.svg": "fonts/icon-font/icon-font.svg",
+  "fonts/icon-font/icon-font.ttf": "fonts/icon-font/icon-font.ttf",
+  "fonts/icon-font/icon-font.woff": "fonts/icon-font/icon-font.woff",
+  "images/styles.sass": "images/left-menu-hover.png"
+}
