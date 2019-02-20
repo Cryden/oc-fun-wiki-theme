@@ -1,0 +1,45 @@
+main
+    +default
+        min-height: calc(100vh - 60px)
+    +mobile 
+        margin-left: 50px
+    +tablet
+        margin-left: 50px
+    +laptop
+        margin-left: 120px
+        min-height: calc(100vh - 100px)
+    +desktop
+        margin-left: 320px
+    .content
+        +default
+        +mobile 
+            margin-left: 10px
+            margin-right: 10px
+        +tablet
+            margin-left: 40px
+            margin-right: 40px
+        +laptop
+            margin-left: 80px
+            margin-right: 60px
+        +desktop
+            margin-left: 80px
+            margin-right: 60px
+
+.page 
+    &__header
+        +default
+            border-right: 3px solid $color-second
+            text-align: right
+            font-size: 14px
+        +mobile 
+            margin: 20px 0
+            padding-right: 10px
+            height: 20px  
+            line-height: 30px
+        +tablet 
+            margin: 40px 0
+            padding-right: 40px
+            height: 40px  
+            line-height: 60px
+        +laptop 
+            padding-right: 60px

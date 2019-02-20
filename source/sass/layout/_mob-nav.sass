@@ -1,15 +1,15 @@
 .mob_nav 
     +default
         position: fixed
+        top: 0
         height: 100vh
         box-shadow: 0px 0px 250px rgba(147, 164, 171, 0.3)
         display: flex
         flex-direction: column
         justify-content: space-between
-    +mobile 
         width: 50px
         padding: 10px
-    +tablet 
+    +laptop 
         width: 120px
         padding: 40px
     +desktop
@@ -17,10 +17,9 @@
 
     .logo
         +default
-        +mobile
             width: 30px
             height: 30px
-        +tablet
+        +laptop
             width: 40px
             height: 40px
         img 
@@ -31,11 +30,10 @@
             color: $color-main-light
             padding: 20px 0
             text-align: center
-        +mobile
             width: 30px
             height: 30px
             font-size: 16px
-        +tablet
+        +laptop
             width: 40px
             height: 40px
             font-size: 20px
@@ -48,12 +46,13 @@
             display: flex
             flex-direction: column
             justify-content: space-between
-        +mobile
             width: 30px
             font-size: 16px
-        +tablet
+        +laptop
             font-size: 20px
             width: 40px
+        a 
+            color: $color-main-light
 
         .icon
             +default
@@ -65,12 +64,11 @@
             border-radius: 50%
             color: $color-main-light
             text-align: center
-        +mobile 
             width: 30px
             height: 30px
             padding: 7px 0
             font-size: 16px
-        +tablet
+        +laptop
             width: 40px
             height: 40px
             padding: 10px 0

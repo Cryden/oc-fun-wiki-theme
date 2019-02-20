@@ -14,6 +14,9 @@ security = "all"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i&amp;subset=cyrillic-ext" rel="stylesheet">
     <link rel="stylesheet" href="{{ 'assets/css/main.css'|theme }}">
 </head>
 <body>
@@ -21,7 +24,17 @@ security = "all"
     <header>
         {% partial 'layout/site-logo' %}
         {% partial 'layout/main-menu' %}
+        {% partial 'layout/social-button' %}
     </header>
+    <main>
+        <div class="page__header">Header</div>
+        {% page %}
+        <div class="content">Content</div>
+    </main>
+    <footer>
+        <strong>F.UN</strong>&nbsp;&nbsp;wiki&nbsp;&nbsp;by&nbsp;&nbsp;<strong>CRYDE</strong>sig<strong>N</strong>. 2015-2019
+    </footer>
+
 
     <div class="overlay"></div>
     
