@@ -1,0 +1,55 @@
+;;
+
+title = "persons"
+url = "/persons"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Person as Person;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "right-sidebar";
+
+    $this['page_title'] = "Люди";
+
+    $this['records'] = Person::where('complete', '>', 60)->orderBy('title', 'asc')->get();
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+    {% set last_char = '' %}
+    {% for record in records %}
+        {% set this_char = record.title|first|upper %}
+        {% if this_char != last_char %}
+            {% if last_char != '' %}
+                </div>
+            {% endif %}
+            {% set last_char = this_char %}
+            <h2> {{ this_char }} </h2>
+            <div class="list">
+        {% endif %}
+        <div class="list_item">
+            <a href="/person/{{record.slug}}">
+                {{ record.title }}
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endput %}
+
+{% put sidebar_top %}
+ sidebar-top
+{% endput %}
+
+
+{% put sidebar_bottom %}
+ sidebar-bottom
+{% endput %}

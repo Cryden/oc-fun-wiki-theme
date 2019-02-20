@@ -1,0 +1,31 @@
+.right_sidebar
+    +default
+        display: grid
+        grid-template-columns: auto
+        grid-auto-rows: minmax(0px, auto)
+    +tablet
+        grid-template-columns: calc(100% - 340px) 40px 300px
+        grid-auto-rows: minmax(0px, auto)
+    .main-content
+        +default
+            grid-column: 1
+            grid-row: 2
+        +tablet
+            grid-column: 1
+            grid-row: 1 / 10
+    .sidebar-top
+        +default
+            grid-column: 1
+            grid-row: 1
+        +tablet 
+            grid-column: 3
+            grid-row: 1
+
+    .sidebar-bottom
+        +default
+            grid-column: 1
+            grid-row: 3
+        +tablet 
+            grid-column: 3
+            grid-row: 2
+

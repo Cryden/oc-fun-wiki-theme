@@ -13,7 +13,8 @@ security = "all"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{ page_title }} | Энциклопедия фантастических вселенных</title>
+    <base href="{{ '/' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i&amp;subset=cyrillic-ext" rel="stylesheet">
@@ -27,9 +28,16 @@ security = "all"
         {% partial 'layout/social-button' %}
     </header>
     <main>
-        <div class="page__header">Header</div>
         {% page %}
-        <div class="content">Content</div>
+
+        {% if template == "left-sidebar" %}
+            {% partial 'layout/left-sidebar' %}
+        {% endif %}
+
+        {% if template == "right-sidebar" %}
+            {% partial 'layout/right-sidebar' %}
+        {% endif %}
+
     </main>
     <footer>
         <strong>F.UN</strong>&nbsp;&nbsp;wiki&nbsp;&nbsp;by&nbsp;&nbsp;<strong>CRYDE</strong>sig<strong>N</strong>. 2015-2019
