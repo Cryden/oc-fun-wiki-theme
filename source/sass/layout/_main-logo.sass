@@ -1,0 +1,24 @@
+.main-logo
+  +default
+    display: flex
+    width: 260px
+    height: 180px
+    z-index: 2
+  +laptop
+    width: 320px
+  &__logo
+    +default
+      display: block
+      margin: 40px auto
+  &__title
+    +default
+      position: absolute
+      top: 90px
+      color: $color-main
+      font-size: unit(8, pts, px)
+      display: block
+      width: 100%
+      text-align: center
+      font-weight: 300
+    +desktop
+      font-size: 12px //unit(10, pts, px)

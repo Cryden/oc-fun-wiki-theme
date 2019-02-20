@@ -1,4 +1,4 @@
-header 
+.mob_nav 
     +default
         position: fixed
         height: 100vh
@@ -12,40 +12,66 @@ header
     +tablet 
         width: 120px
         padding: 40px
+    +desktop
+        display: none
 
     .logo
-        +default 
+        +default
+        +mobile
+            width: 30px
+            height: 30px
+        +tablet
             width: 40px
             height: 40px
+        img 
+            width: 100%
+
     .burger
         +default
-            width: 40px
-            height: 40px
             color: $color-main-light
             padding: 20px 0
-            font-size: 20px
             text-align: center
+        +mobile
+            width: 30px
+            height: 30px
+            font-size: 16px
+        +tablet
+            width: 40px
+            height: 40px
+            font-size: 20px
 
     .social_buttons
         +default
-            width: 40px
+            width: 20px
             text-align: center
             color: $color-main-light
             display: flex
             flex-direction: column
             justify-content: space-between
+        +mobile
+            width: 30px
+            font-size: 16px
+        +tablet
             font-size: 20px
+            width: 40px
 
         .icon
-            padding-bottom: 40px
+            +default
+                padding-bottom: 40px
 
     .login
         +default
-            width: 40px
-            height: 40px
             border: 1px solid $color-main-light
             border-radius: 50%
             color: $color-main-light
+            text-align: center
+        +mobile 
+            width: 30px
+            height: 30px
+            padding: 7px 0
+            font-size: 16px
+        +tablet
+            width: 40px
+            height: 40px
             padding: 10px 0
             font-size: 20px
-            text-align: center
