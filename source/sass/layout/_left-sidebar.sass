@@ -6,10 +6,17 @@
     +tablet
         grid-template-columns: 300px 40px calc(100% - 340px)
         grid-auto-rows: minmax(0px, auto)
+    .header-content
+        +default
+            grid-column: 1
+            grid-row: 1
+        +tablet
+            grid-column: 1
+            grid-row: 1
     .main-content
         +default
             grid-column: 1
-            grid-row: 2
+            grid-row: 3
         +tablet
             grid-column: 3
             grid-row: 1 / 10
@@ -23,7 +30,7 @@
     .sidebar-top
         +default
             grid-column: 1
-            grid-row: 1
+            grid-row: 2
             margin-bottom: 20px
         +tablet 
             grid-column: 1

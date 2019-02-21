@@ -1,0 +1,103 @@
+;;
+
+title = "universe"
+url = "/:slug"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Universe as Universe;
+
+function onStart()
+{
+// Template
+$this['template'] = "right-sidebar";
+
+// Get record
+$this['record'] = Universe::where('slug', '=', $this->param('slug'))->first();
+
+if ($this['record'] == null) {
+return \Redirect::to('404');
+};
+
+// SEO title
+$this['page_title'] = $this['record']->name;
+
+// Shema.org properties
+//$this['shema_type'] = "person/shema";
+
+// og_meta properties
+$this['og_meta'] = [
+"title" => $this['record']->name,
+"description" => $this['record']->description,
+"image" => Url::to('storage/app/media',$this['record']->cover),
+"type" => '',
+"url" => Request::url(),
+];
+
+// Sidebar
+$this['sidebar'] = "person/author/sidebar";
+
+}
+
+==
+{##}
+
+<div class="universe-cover">
+    <div class="universe-cover__image">
+        <img src="{{ record.cover|media }}" alt="{{ record.name }} cover">
+    </div>
+    <div class="universe-cover__logo">
+        <img src="{{ record.logo|media }}" alt="{{ record.name }} logo">
+    </div>
+</div>
+
+{% put header_content %}
+    <h1 class="universe__title">{{ record.name }}</h1>
+    <div class="universe__subtitle">{{ record.name_translate }}</div>
+{% endput %}
+
+{% put content %}
+    <div class="universe__description">
+        {{ record.description|raw }}
+    </div>
+{% endput %}
+
+{% put sidebar_top %}
+<div id="universe-info" class="sidebar-block">
+    <div class="infostring">
+        <b>Год создания:</b> {{ record.created_year }}
+    </div>
+
+    <div class="infostring">
+        <b>Создатели:</b>
+        {% for person in record.persons %}
+        <a href="/person/{{ person.slug }}">
+            {{ person.title }}{% if not loop.last %}, {% endif %}
+        </a>
+        {% endfor %}
+        {% if (record.persons is not empty) and (record.organisations is not empty) %}, {% endif %}
+        {% for organisation in record.organisations %}
+        <a href="/organisation/{{ organisation.slug }}">
+            {{ organisation.title }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+    </div>
+
+    <div class="infostring">
+        <b>Жанр:</b>
+        {% for genre in record.genres %}
+        {{ genre.title }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endput %}
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/social-share-button' %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
+
+{% put aside_content %}
+    {% partial 'widgets/disqus' %}
+{% endput %}

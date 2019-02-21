@@ -1,0 +1,52 @@
+;;
+
+title = "universes"
+url = "/universes"
+layout = "default"
+is_hidden = 0
+
+==
+
+use fw\Backend\Models\Universe as Universe;
+
+function onStart()
+{
+$this['template'] = "right-sidebar";
+
+$this['page_title'] = "Вселенные";
+$this['records'] = Universe::orderBy('name', 'asc')->get();
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+{% set last_char = '' %}
+{% for record in records %}
+{% set this_char = record.name|first|upper %}
+{% if this_char != last_char %}
+{% if last_char != '' %}
+</div>
+{% endif %}
+{% set last_char = this_char%}
+<h2> {{ this_char }} </h2>
+<div class="card_list">
+    {% endif %}
+    <div class="card-item">
+        <div class="card">
+            <a href="/{{ record.slug }}">
+                <div class="card__image">
+                    <img src="{{ record.cover|media|resize(530) }}" alt="{{ record.name }}" />
+                </div>
+                <div class="card__content">
+                    <h4>{{ record.name }}</h4>
+                    <div class="h4-subtitle"> {{ record.name_translate }} </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endput %}
