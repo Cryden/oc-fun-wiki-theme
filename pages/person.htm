@@ -58,34 +58,61 @@ function onStart()
             <div class="person__info">
                     <div class="person-info">
                         {% if record.personroles is not empty %}
-                            <div class="infostring">Род деятельности:
+                            <div class="infostring infostring-light">
                                 {% for personrole in record.personroles %}
                                     {{ personrole.title }}{% if not loop.last %}, {% endif %}
                                 {% endfor %}
                             </div>
                         {% endif %}
                         {% if record.persons is not empty %}
-                            <div class="infostring">Псевдонимы:
+                            <div class="infostring"><b>Псевдонимы:</b>
                                 {% for person in record.persons %}
-                                <b>{{ person.title|person }}{% if not loop.last %}, {% endif %}</b>
+                                    {{ person.title|person }}{% if not loop.last %}, {% endif %}
                                 {% endfor %}
                             </div>
                         {% endif %}
-                        <div class="infostring">Дата рождения:
-                            <b>{{ record.birthdate|ru_date }}</b>
+                        <div class="infostring"><b>Дата рождения:</b>
+                            {{ record.birthdate|ru_date }}
                         </div>
                         {% if record.deathdata %}
-                            <div class="infostring">Дата смерти:
-                                <b>{{ record.deathdata|ru_date }}</b>
+                            <div class="infostring"><b>Дата смерти:</b>
+                                {{ record.deathdata|ru_date }}
                             </div>
                         {% endif %}
                     </div>
             </div>
         </div>
+
         <div class="person__description">
             <h2> Биография </h2>
                 {{ record.bio|raw }}
-        </diV>
+        </div>
+
+        {% if record.universes is not empty %}
+            <section id="universe">
+                <h2>Вселенные</h2>
+                <div class="card_list">
+                    {% for universe in record.universes %}
+                    <div class="card-item card">
+                        <div class="">
+                            <a href="/{{ universe.slug }}">
+                                <div class="card__image">
+                                    <img src="{{ universe.cover|media|resize(530) }}" alt="{{ universe.name }}" />
+                                </div>
+                                <div class="card__content">
+                                    <h4>{{ universe.name }}</h4>
+                                    <div class="h4-subtitle"> {{ universe.name_translate }} </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+        
+
     {% endif %}
 
 {% endput %}
@@ -97,5 +124,10 @@ function onStart()
 {% endput %}
 
 {% put sidebar_bottom %}
-    
+    {% partial 'widgets/social-share-button' %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
+
+{% put aside_content %}
+    {% partial 'widgets/disqus' %}
 {% endput %}

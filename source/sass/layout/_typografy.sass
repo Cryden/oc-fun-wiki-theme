@@ -33,6 +33,9 @@ h2
     height: 45px
     position: absolute
 
+h2.outline, .outline
+    display: none;
+
 h3
   +mobile
     font-size: 14px
@@ -79,15 +82,12 @@ h4
 .infostring
   +default
     display: inline-block
-    min-height: 30px
-    line-height: 22px
     font-size: 14px
-    color: $color-main-light
+    color: $color-main
     width: 100%
-    padding-top: 4px
+    margin-bottom: 20px
+    line-height: 20px
   +desktop
-    min-height: 50px
-    padding-top: 14px
     font-size: 16px
   &-icon 
     +default
@@ -101,6 +101,9 @@ h4
       margin-bottom: 20px
       img 
         padding-right: 20px
+  &-light
+    +default
+      color: $color-main-light
 strong, b 
   +default
     font-weight: 600
@@ -108,7 +111,7 @@ strong, b
 p 
   +default
     color: $color-main
-    font-size: 15px
+    font-size: 14px
     margin-bottom: 10px
     line-height: 22px
     text-indent: 20px

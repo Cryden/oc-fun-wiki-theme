@@ -11,9 +11,10 @@ window.addEventListener('resize', function () {
 
 function card_resize() {
   list_width = ($('.card_list').width());
-  max_width = 530;
+  max_width = 300;
+  min_width = 250;
   column_min = Math.floor(list_width / max_width) + 1;
-  column_max = Math.floor(list_width / 260)
+  column_max = Math.floor(list_width / min_width)
   if (column_min < column_max) {
     column_min = column_max
   }
@@ -26,8 +27,9 @@ function card_resize() {
 function list_resize() {
   list_width = ($('.list').width());
   max_width = 530;
+  min_width = 250;
   column_min = Math.floor(list_width / max_width) + 1;
-  column_max = Math.floor(list_width / 260)
+  column_max = Math.floor(list_width / min_width)
   if (column_min < column_max) {
     column_min = column_max
   }
