@@ -9,6 +9,7 @@ security = "all"
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +18,11 @@ security = "all"
     <base href="{{ '/' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i&amp;subset=cyrillic-ext"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ 'assets/css/main.css'|theme }}">
 </head>
+
 <body>
     {% partial 'layout/mob-nav' %}
     <header>
@@ -31,21 +34,23 @@ security = "all"
         {% page %}
 
         {% if template == "left-sidebar" %}
-            {% partial 'layout/left-sidebar' %}
+        {% partial 'layout/left-sidebar' %}
         {% endif %}
 
         {% if template == "right-sidebar" %}
-            {% partial 'layout/right-sidebar' %}
+        {% partial 'layout/right-sidebar' %}
         {% endif %}
 
     </main>
     <footer>
-        <strong>F.UN</strong>&nbsp;&nbsp;wiki&nbsp;&nbsp;by&nbsp;&nbsp;<strong>CRYDE</strong>sig<strong>N</strong>. 2015-2019
+        <strong>F.UN</strong>&nbsp;&nbsp;wiki&nbsp;&nbsp;by&nbsp;&nbsp;<strong>CRYDE</strong>sig<strong>N</strong>.
+        2015-2019
     </footer>
 
 
     <div class="overlay"></div>
-    
+
     <script src="{{ 'assets/js/main.js'|theme }}"></script>
 </body>
+
 </html>
