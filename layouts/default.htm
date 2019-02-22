@@ -30,8 +30,8 @@ security = "all"
         {% partial 'layout/main-menu' %}
         {% partial 'layout/social-button' %}
     </header>
-    <main>
-        {% page %}
+    {% page %}
+    <main class="{{ content }}">
 
         {% if template == "left-sidebar" %}
         {% partial 'layout/left-sidebar' %}

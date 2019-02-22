@@ -11,10 +11,15 @@ use fw\Backend\Models\Person as Person;
 function onStart()
 {
     // Template
+    $this['content'] = "person";
     $this['template'] = "left-sidebar";
 
     // Get record
     $this['record'] = Person::where('slug', '=', $this->param('slug'))->first();
+
+    if ($this['record'] == null) {
+        return \Redirect::to('404');
+    };
 
     if ($this['record']->is_pseudo ) {
         return Redirect::to('person/'.$this['record']->pseudos[0]->slug);
@@ -42,85 +47,80 @@ function onStart()
 
 {% partial 'layout/page-title' %}
 
-{% put content %}
-    {% if record %}
-        <div class="person">
-            <div class="person__title">
-                <h1> {{ record.title|person }} </h1>
-                <div class="subtitle">
-                    {% if record.name_translate is not empty %}
-                        {{ record.name_translate }}
-                    {% else %}
-                        {{ record.name }}
-                    {% endif %}
-                </div>
-            </div>
-            <div class="person__info">
-                    <div class="person-info">
-                        {% if record.personroles is not empty %}
-                            <div class="infostring infostring-light">
-                                {% for personrole in record.personroles %}
-                                    {{ personrole.title }}{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        {% if record.persons is not empty %}
-                            <div class="infostring"><b>Псевдонимы:</b>
-                                {% for person in record.persons %}
-                                    {{ person.title|person }}{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        <div class="infostring"><b>Дата рождения:</b>
-                            {{ record.birthdate|ru_date }}
-                        </div>
-                        {% if record.deathdata %}
-                            <div class="infostring"><b>Дата смерти:</b>
-                                {{ record.deathdata|ru_date }}
-                            </div>
-                        {% endif %}
-                    </div>
-            </div>
+{% put header_content %}
+    <div class="person__title">
+        <h1> {{ record.title|person }} </h1>
+        <div class="subtitle">
+            {% if record.name_translate is not empty %}
+                {{ record.name_translate }}
+            {% else %}
+                {{ record.name }}
+            {% endif %}
         </div>
-
-        <div class="person__description">
-            <h2> Биография </h2>
-                {{ record.bio|raw }}
-        </div>
-
-        {% if record.universes is not empty %}
-            <section id="universe">
-                <h2>Вселенные</h2>
-                <div class="card_list">
-                    {% for universe in record.universes %}
-                    <div class="card-item card">
-                        <div class="">
-                            <a href="/{{ universe.slug }}">
-                                <div class="card__image">
-                                    <img src="{{ universe.cover|media|resize(530) }}" alt="{{ universe.name }}" />
-                                </div>
-                                <div class="card__content">
-                                    <h4>{{ universe.name }}</h4>
-                                    <div class="h4-subtitle"> {{ universe.name_translate }} </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </section>
-        {% endif %}
-
-        
-
-    {% endif %}
-
+    </div>
 {% endput %}
 
 {% put sidebar_top %}
     <div class="person__photo">
         <img src="{{ record.photo|media }}" />
     </div>
+{% endput %}
+
+{% put content %}
+    <div class="person__info">
+        <div class="person-info">
+            {% if record.personroles is not empty %}
+                <div class="infostring infostring-light">
+                    {% for personrole in record.personroles %}
+                        {{ personrole.title }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if record.persons is not empty %}
+                <div class="infostring"><b>Псевдонимы:</b>
+                    {% for person in record.persons %}
+                        {{ person.title|person }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="infostring"><b>Дата рождения:</b>
+                {{ record.birthdate|ru_date }}
+            </div>
+            {% if record.deathdata %}
+                <div class="infostring"><b>Дата смерти:</b>
+                    {{ record.deathdata|ru_date }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="person__description">
+        <h2> Биография </h2>
+            {{ record.bio|raw }}
+    </div>
+
+    {% if record.universes is not empty %}
+        <section id="universe">
+            <h2>Вселенные</h2>
+            <div class="card_list">
+                {% for universe in record.universes %}
+                <div class="card-item card">
+                    <div class="">
+                        <a href="/{{ universe.slug }}">
+                            <div class="card__image">
+                                <img src="{{ universe.cover|media|resize(530) }}" alt="{{ universe.name }}" />
+                            </div>
+                            <div class="card__content">
+                                <h4>{{ universe.name }}</h4>
+                                <div class="h4-subtitle"> {{ universe.name_translate }} </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 {% endput %}
 
 {% put sidebar_bottom %}

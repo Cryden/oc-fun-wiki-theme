@@ -2,7 +2,9 @@
     +default
         display: grid
         grid-template-columns: auto
-        grid-auto-rows: minmax(0px, auto)
+        grid-template-rows: minmax (min-content, 60px)
+        grid-auto-rows: auto
+
     +tablet
         grid-template-columns: 300px 40px calc(100% - 340px)
         grid-auto-rows: minmax(0px, auto)
@@ -11,22 +13,8 @@
             grid-column: 1
             grid-row: 1
         +tablet
-            grid-column: 1
+            grid-column: 3
             grid-row: 1
-    .main-content
-        +default
-            grid-column: 1
-            grid-row: 3
-        +tablet
-            grid-column: 3
-            grid-row: 1 / 10
-    .aside-content
-        +default 
-            grid-column: 1
-            grid-row: 4
-        +tablet
-            grid-column: 3
-            grid-row: 11
     .sidebar-top
         +default
             grid-column: 1
@@ -34,12 +22,25 @@
             margin-bottom: 20px
         +tablet 
             grid-column: 1
-            grid-row: 1
-
-    .sidebar-bottom
+            grid-row: 1 / 3
+    .main-content
         +default
             grid-column: 1
             grid-row: 3
+        +tablet
+            grid-column: 3
+            grid-row: 2 / 10
+    .sidebar-bottom
+        +default
+            grid-column: 1
+            grid-row: 4
         +tablet 
             grid-column: 1
-            grid-row: 2
+            grid-row: 3 / 12
+    .aside-content
+        +default 
+            grid-column: 1
+            grid-row: 5
+        +tablet
+            grid-column: 3
+            grid-row: 11
