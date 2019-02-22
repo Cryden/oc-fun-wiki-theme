@@ -1,0 +1,18 @@
+title = 404
+url = "/404"
+layout = "default"
+is_hidden = 0
+==
+function onStart() 
+{
+    $this['template'] = "one-column";
+}
+==
+{##}
+
+{% partial 'layout/page-title' page_title="404" %}
+
+{% put content %}
+  Page not found
+{% endput %}
+

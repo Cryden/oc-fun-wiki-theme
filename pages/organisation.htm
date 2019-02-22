@@ -1,0 +1,86 @@
+;;
+
+title = "organisation"
+url = "/organisation/:slug"
+layout = "default"
+is_hidden = 0
+
+==
+use fw\Backend\Models\Organisation as Organisation;
+
+function onStart()
+{
+    // Template
+    $this['content'] = "person";
+    $this['template'] = "left-sidebar";
+
+    // Get record
+    $this['record'] = Organisation::where('slug', '=', $this->param('slug'))->first();
+
+    if ($this['record'] == null) {
+        return \Redirect::to('404');
+    };
+
+    // SEO title
+    $this['page_title'] = $this['record']->title;
+
+    // Shema.org properties
+    // $this['shema_type'] = "person/shema";
+
+    // og_meta properties
+    $this['og_meta'] = [
+        "title" => $this['record']->title,
+        "description" => $this['record']->description,
+        "image" => Url::to('storage/app/media',$this['record']->logo),
+        "type" => '',
+        "url" => Request::url(),
+    ];
+
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put header_content %}
+    <div class="person__title">
+        <h1> {{ record.name }} </h1>
+        <div class="subtitle">
+            {% if record.name_ru is not empty %}
+                {{ record.name_ru }}
+            {% endif %}
+        </div>
+    </div>
+{% endput %}
+
+{% put sidebar_top %}
+    <div class="person__photo">
+        <img src="{{ record.logo|media }}" />
+    </div>
+{% endput %}
+
+{% put content %}
+    <div class="person__info">
+        <div class="infostring">Дата основания:
+            <b>{{ record.open_date|ru_date }}</b>
+        </div>
+        {% if record.closed_date %}
+            <div class="infostring">Дата закрытия:
+                <b>{{ record.closed_date|ru_date }}</b>
+            </div>
+        {% endif %}
+    </div>
+
+    <h2>Информация об организации</h2>
+    {{ record.description|raw }}
+{% endput %}
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/social-share-button' %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
+
+{% put aside_content %}
+    {% partial 'widgets/disqus' %}
+{% endput %}

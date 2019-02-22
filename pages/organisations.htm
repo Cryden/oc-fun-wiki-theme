@@ -1,0 +1,54 @@
+;;
+
+title = "organisations"
+url = "/organisations"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Organisation as Organisation;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "right-sidebar";
+
+    $this['page_title'] = "Компании";
+
+    $this['records'] = Organisation::where('complete', '>', 60)->orderBy('title', 'asc')->get();
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+    {% set last_char = '' %}
+    {% for record in records %}
+        {% set this_char = record.title|first|upper %}
+        {% if this_char != last_char %}
+            {% if last_char != '' %}
+                </div>
+            {% endif %}
+            {% set last_char = this_char %}
+            <h2> {{ this_char }} </h2>
+            <div class="list">
+        {% endif %}
+        <div class="list_item">
+            <a href="/organisation/{{record.slug}}">
+                {{ record.title }}
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endput %}
+
+{% put sidebar_top %}
+{% endput %}
+
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}

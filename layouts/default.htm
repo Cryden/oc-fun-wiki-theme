@@ -30,9 +30,9 @@ security = "all"
         {% partial 'layout/main-menu' %}
         {% partial 'layout/social-button' %}
     </header>
-    {% page %}
+    
     <main class="{{ content }}">
-
+        {% page %}
         {% if template == "left-sidebar" %}
         {% partial 'layout/left-sidebar' %}
         {% endif %}
@@ -40,6 +40,8 @@ security = "all"
         {% if template == "right-sidebar" %}
         {% partial 'layout/right-sidebar' %}
         {% endif %}
+
+        {% placeholder one_column %}
 
     </main>
     <footer>

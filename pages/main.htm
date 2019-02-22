@@ -3,3 +3,34 @@ url = "/"
 layout = "default"
 is_hidden = 0
 ==
+function onStart()
+{
+    $this['page_title'] = "Главная";
+
+    $this['page_description'] = "Энциклопедия фантастических вселенных - про­ект пос­вя­щен­ный фантастике. Ко­миксы, книги, филь­мы, се­ри­алы, нас­толь­ные игры, ви­деоиг­ры.";
+    
+    $this['content'] = "main";
+    
+    // og_meta properties
+    $this['og_meta'] = [
+      "title" => "Энциклопедия фантастических вселенных",
+      "description" => $this['page_description'],
+      "image" => Url::to('themes/fun-wiki/assets/images/alpha.jpg'),
+      "type" => 'webpage',
+      "url" =>  Request::url(),
+    ];
+    
+    // Shema.org
+    $this['shema_type'] = "shema/website";
+
+}
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+<img class="page__main-full" src="{{ 'alpha.jpg'|media }}" alt="fun alpha" />
+
+{% put one_column %}
+  {% content 'main' %}
+{% endput %}
