@@ -2,6 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const IconFontPlugin = require('icon-font-loader').Plugin;
+const CopyPlugin = require('copy-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -56,14 +57,14 @@ module.exports = {
         ]
     },
     plugins: [
-        // new CleanWebpackPlugin(
-        //     [
-        //         path.resolve('assets')
-        //     ],
-        //     {
-        //         root: path.resolve('')
-        //     } 
-        // ),
+        new CleanWebpackPlugin(
+            [
+                path.resolve('assets')
+            ],
+            {
+                root: path.resolve('')
+            } 
+        ),
         new MiniCssExtractPlugin({
                 filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
                 chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
@@ -74,5 +75,10 @@ module.exports = {
                 publicPath: 'themes/_fun-wiki/assets/',
             }
         ),
+        new CopyPlugin([
+            { 
+                from: 'source/images/icons', to: 'images/icons' 
+            },
+        ]),
     ]
 };
