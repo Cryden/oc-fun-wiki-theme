@@ -55,7 +55,14 @@ security = "all"
 
     <div class="overlay"></div>
 
+    {% if shema_type is defined %}
+        {% partial shema_type %}
+    {% endif %}
+
     <script src="{{ 'assets/js/main.js'|theme }}"></script>
+    {% partial "meta/googletag" %}
+    {% scripts %}
+    
 </body>
 
 </html>

@@ -47,5 +47,7 @@
   "images/icons/firefox_app_60x60.png": "images/icons/firefox_app_60x60.png",
   "images/icons/manifest.json": "images/icons/manifest.json",
   "images/icons/manifest.webapp": "images/icons/manifest.webapp",
-  "images/styles.sass": "images/left-menu-hover.png"
+  "images/styles.sass": "images/left-menu-hover.png",
+  "images/logo-min.svg": "images/logo-min.svg",
+  "images/logo.svg": "images/logo.svg"
 }

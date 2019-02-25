@@ -77,7 +77,10 @@ module.exports = {
         ),
         new CopyPlugin([
             { 
-                from: 'source/images/icons', to: 'images/icons' 
+                from: 'source/images/icons', to: 'images/icons'
+            },
+            {
+                from: 'source/images/logo*.*', to: 'images/[name].[ext]',
             },
         ]),
     ]

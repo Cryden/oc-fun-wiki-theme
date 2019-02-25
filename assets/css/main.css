@@ -1,4 +1,4 @@
-.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before {    font-family: 'icon-font';
+.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before {    font-family: 'icon-font';
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -470,7 +470,7 @@ template {
   content: '\F103'; }
 
 .icon-vk:before {
-  content: '\F10c'; }
+  content: '\F10d'; }
 
 .icon-facebook:before {
   content: '\F109'; }
@@ -481,11 +481,14 @@ template {
 .icon-instagram:before {
   content: '\F107'; }
 
-.icon-news::before {
+.icon-google:before {
   content: '\F10a'; }
 
+.icon-news::before {
+  content: '\F10b'; }
+
 .icon-universe::before {
-  content: '\F10d'; }
+  content: '\F10e'; }
 
 .icon-person::before {
   content: '\F103'; }
@@ -500,7 +503,7 @@ template {
   content: '\F108'; }
 
 .icon-dropdown::before {
-  content: '\F10b'; }
+  content: '\F10c'; }
 
 .icon-company::before {
   content: '\F102'; }
