@@ -9,16 +9,22 @@ function onStart()
 {##}
 
 <h2>Новости</h2>
+<div class="grid">
+<div class="grid-sizer"></div>
+<div class="gutter-sizer"></div>
 {% for record in records %}
-<article class="card newsfeed">
-    <a href="/news/{{ record.slug }}">
-        <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
-        <div class="news">
-            <div class="news__date"> {{ record.updated_at|ru_date }}</div>
-            <h1> {{ record.title }} </h1>
-            <div class="news__tag"> #{{ record.universe.name }} </div>
-            <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
-        </div>
-    </a>
-</article>
+<div class="grid-item">
+    <article class="card newsfeed">
+        <a href="/news/{{ record.slug }}">
+            <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
+            <div class="news">
+                <div class="news__date"> {{ record.updated_at|ru_date }}</div>
+                <h1> {{ record.title }} </h1>
+                <div class="news__tag"> #{{ record.universe.name }} </div>
+                <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
+            </div>
+        </a>
+    </article>
+</div>
 {% endfor %}
+</div>

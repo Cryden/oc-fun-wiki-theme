@@ -38,3 +38,16 @@ function list_resize() {
   $('.list_item').css('max-width', width);
   $('.list_item').css('min-width', width);
 }
+
+// vanilla JS
+const Isotope = require('isotope-layout');
+
+var grid = document.querySelector('.grid');
+var iso = new Isotope( grid, {
+    itemSelector: ".grid-item",
+    percentPosition:!0,
+    masonry:{
+        columnWidth:".grid-sizer",
+        horizontalOrder: true
+    }
+});
