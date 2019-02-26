@@ -4,10 +4,10 @@
     "@context": "http://schema.org",
         "@type": "Person",
         "name" : "{{ record.title }}",
-        "jobTitle" : "писатель",
+        "jobTitle" : "{% if record.personroles is not empty %}{% for personrole in record.personroles %}{{ personrole.title }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}",
         "birthDate" : "{{ record.birthdate }}",
         "birthPlace" : "",
-        "deathDate" : "",
+        "deathDate" : {% if record.deathdata is not empty %}{{ record.deathdata }}{% else %}""{% endif %},
         "image": "{{ og_meta.image }}",
         "description" : "{{ record.bio|slice(0, 160)|striptags }}",
         "url": ""
