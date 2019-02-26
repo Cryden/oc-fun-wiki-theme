@@ -1,0 +1,15 @@
+==
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+        "@type": "Person",
+        "name" : "{{ record.title }}",
+        "jobTitle" : "писатель",
+        "birthDate" : "{{ record.birthdate }}",
+        "birthPlace" : "",
+        "deathDate" : "",
+        "image": "{{ og_meta.image }}",
+        "description" : "{{ record.bio|slice(0, 160)|striptags }}",
+        "url": ""
+    }
+</script>
