@@ -41,13 +41,17 @@ function list_resize() {
 
 // vanilla JS
 const Isotope = require('isotope-layout');
+var imagesLoaded = require('imagesloaded');
 
 var grid = document.querySelector('.grid');
 var iso = new Isotope( grid, {
-    itemSelector: ".grid-item",
-    percentPosition:!0,
-    masonry:{
-        columnWidth:".grid-sizer",
-        horizontalOrder: true
-    }
+    masonry: {
+        columnWidth: '.grid-sizer',
+        gutter: '.gutter-sizer'
+    },
+    itemSelector: '.grid-item'
+});
+
+imagesLoaded(grid).on( 'progress', function() {
+    iso.layout();
 });

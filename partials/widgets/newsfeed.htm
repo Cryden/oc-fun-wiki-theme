@@ -3,7 +3,7 @@ use Fw\Backend\Models\News as News;
 
 function onStart()
 {
-    $this['records'] = News::all();
+    $this['records'] = News::paginate(15);
 }
 ==
 {##}

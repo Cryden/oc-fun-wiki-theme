@@ -1062,12 +1062,23 @@ footer {
 .grid {
   width: 100%; }
 
-.grid-sizer,
-.grid-item {
-  width: 22%; }
+.grid-sizer, .grid-item {
+  width: 100%; }
+  @media (min-width: 768px) {
+    .grid-sizer, .grid-item {
+      width: calc((100% - 40px) / 3); } }
+  @media (min-width: 1200px) {
+    .grid-sizer, .grid-item {
+      width: calc((100% - 60px) / 4); } }
 
 .gutter-sizer {
-  width: 4%; }
+  width: 0; }
+  @media (min-width: 768px) {
+    .gutter-sizer {
+      width: 20px; } }
+  @media (min-width: 1200px) {
+    .gutter-sizer {
+      width: 20px; } }
 
 .page__main-full {
   width: 100%;
@@ -1174,13 +1185,16 @@ footer {
         font-size: 20px; } }
 
 .newsfeed h1 {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 24px;
   margin-bottom: 20px; }
 
 .newsfeed p {
   font-size: 14px;
   line-height: 21px; }
+
+.newsfeed img {
+  width: 100%; }
 
 .newsfeed .news {
   padding: 10px; }
