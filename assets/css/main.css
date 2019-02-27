@@ -1080,6 +1080,13 @@ footer {
     .gutter-sizer {
       width: 20px; } }
 
+.page-load-status {
+  display: none;
+  padding-top: 20px;
+  border-top: 1px solid #DDD;
+  text-align: center;
+  color: #777; }
+
 .page__main-full {
   width: 100%;
   margin-bottom: 20px; }

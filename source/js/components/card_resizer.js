@@ -42,6 +42,7 @@ function list_resize() {
 // vanilla JS
 const Isotope = require('isotope-layout');
 var imagesLoaded = require('imagesloaded');
+const InfiniteScroll = require('infinite-scroll');
 
 var grid = document.querySelector('.grid');
 var iso = new Isotope( grid, {
@@ -55,3 +56,28 @@ var iso = new Isotope( grid, {
 imagesLoaded(grid).on( 'progress', function() {
     iso.layout();
 });
+
+//-------------------------------------//
+// hack CodePen to load pens as pages
+
+// var nextPenSlugs = [
+//     '202252c2f5f192688dada252913ccf13',
+//     'a308f05af22690139e9a2bc655bfe3ee',
+//     '6c9ff23039157ee37b3ab982245eef28',
+//   ];
+  
+//   function getPenPath() {
+//     // var slug = nextPenSlugs[ this.loadCount ];
+//     console.log( this.loadCount );
+//     return '/dark-sun';
+//   }
+
+//   //-------------------------------------//
+//   // init Infinte Scroll
+  
+//   var infScroll = new InfiniteScroll( grid, {
+//     path: getPenPath,
+//     append: '.grid-item',
+//     outlayer: iso,
+//     status: '.page-load-status',
+//   });

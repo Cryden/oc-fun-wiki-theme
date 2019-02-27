@@ -32,7 +32,8 @@ function onStart()
 <img class="page__main-full" src="{{ 'alpha.jpg'|media }}" alt="fun alpha" />
 
 {% put one_column %}
-  {% content 'main' %}
+    {% content 'main' %}
 
-  {% partial 'widgets/newsfeed' %}
+    <h2>Новости</h2>
+    {% partial 'widgets/newsfeed' %}
 {% endput %}
