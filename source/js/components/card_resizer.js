@@ -57,27 +57,18 @@ imagesLoaded(grid).on( 'progress', function() {
     iso.layout();
 });
 
-//-------------------------------------//
-// hack CodePen to load pens as pages
+InfiniteScroll.imagesLoaded = imagesLoaded;
 
-// var nextPenSlugs = [
-//     '202252c2f5f192688dada252913ccf13',
-//     'a308f05af22690139e9a2bc655bfe3ee',
-//     '6c9ff23039157ee37b3ab982245eef28',
-//   ];
-  
-//   function getPenPath() {
-//     // var slug = nextPenSlugs[ this.loadCount ];
-//     console.log( this.loadCount );
-//     return '/dark-sun';
-//   }
+function getPenPath() {
+    $link = (this.loadCount+2 < $last_page) ? 'more-news/' + this.loadCount : '';
+    return $link;
+}
 
-//   //-------------------------------------//
-//   // init Infinte Scroll
   
-//   var infScroll = new InfiniteScroll( grid, {
-//     path: getPenPath,
-//     append: '.grid-item',
-//     outlayer: iso,
-//     status: '.page-load-status',
-//   });
+var infScroll = new InfiniteScroll( grid, {
+    path: getPenPath,
+    append: '.grid-item',
+    outlayer: iso,
+    status: '.page-load-status',
+    history: false
+});
