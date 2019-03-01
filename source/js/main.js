@@ -2,7 +2,11 @@
 // import VueResource from 'vue-resource'
 
 try {
-    window.$ = window.jQuery = require('jquery')
+    window.$ = window.jQuery = require('jquery');
+
+    window.Isotope = require('isotope-layout');
+    window.imagesLoaded = require('imagesloaded');
+    window.InfiniteScroll = require('infinite-scroll');
 } catch (e) {}
 
 // Vue.use(VueResource)

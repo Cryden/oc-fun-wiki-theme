@@ -38,37 +38,3 @@ function list_resize() {
   $('.list_item').css('max-width', width);
   $('.list_item').css('min-width', width);
 }
-
-// vanilla JS
-const Isotope = require('isotope-layout');
-var imagesLoaded = require('imagesloaded');
-const InfiniteScroll = require('infinite-scroll');
-
-var grid = document.querySelector('.grid');
-var iso = new Isotope( grid, {
-    masonry: {
-        columnWidth: '.grid-sizer',
-        gutter: '.gutter-sizer'
-    },
-    itemSelector: '.grid-item'
-});
-
-imagesLoaded(grid).on( 'progress', function() {
-    iso.layout();
-});
-
-InfiniteScroll.imagesLoaded = imagesLoaded;
-
-function getPenPath() {
-    $link = (this.loadCount+2 < $last_page) ? 'more-news/' + this.loadCount : '';
-    return $link;
-}
-
-  
-var infScroll = new InfiniteScroll( grid, {
-    path: getPenPath,
-    append: '.grid-item',
-    outlayer: iso,
-    status: '.page-load-status',
-    history: false
-});
