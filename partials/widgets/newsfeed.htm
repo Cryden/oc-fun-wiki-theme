@@ -1,11 +1,10 @@
 ==
 ==
 {##}
-
 <div class="grid">
 <div class="grid-sizer"></div>
 <div class="gutter-sizer"></div>
-    {% partial "widgets/newsfeed_page" %}
+    {% partial "widgets/newsfeed_page" pagination=this.pagination %}
 </div>
 
 <div class="page-load-status">
@@ -13,6 +12,7 @@
   <p class="infinite-scroll-last">Новостей больше нет</p>
   <p class="infinite-scroll-error">No more pages to load</p>
 </div>
+
 
 {% put scripts %}
 <script>
@@ -34,17 +34,17 @@ $(document).ready(function () {
     InfiniteScroll.imagesLoaded = imagesLoaded;
 
     function getPenPath() {
-        $link = (this.loadCount+2 < $last_page) ? 'more-news/' + this.loadCount : '';
+        $link = (this.loadCount+2 < $last_page) ? '?page=' + this.loadCount : '';
         return $link;
     }
 
     
     var infScroll = new InfiniteScroll( grid, {
-        path: getPenPath,
+        path: '.pagination__next',
         append: '.grid-item',
         outlayer: iso,
         status: '.page-load-status',
-        history: false
+        history: 'push'
     });
 });
 </script>

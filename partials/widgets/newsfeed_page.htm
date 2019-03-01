@@ -3,10 +3,15 @@ use Fw\Backend\Models\News as News;
 
 function onStart()
 {
-    $this['records'] = News::paginate(15);
+    $this['records'] = News::paginate(15, $this['pagination']);
+    $this['next_page'] = $this['pagination']+1;
+    $this['prev_page'] = $this['pagination']+1;
 }
 ==
 {##}
+
+{{ pagination }}
+
 <script>
 $last_page = {{ records.lastPage }};
 </script>
@@ -26,3 +31,7 @@ $last_page = {{ records.lastPage }};
     </article>
 </div>
 {% endfor %}
+
+<p class="pagination">
+  <a class="pagination__next" href="/?page={{ next_page }}">Next page</a>
+</p>

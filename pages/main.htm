@@ -23,9 +23,14 @@ function onStart()
     // Shema.org
     $this['shema_type'] = "shema/website";
 
+    // if (get('page') != null )
+    // {
+    //     return $this->render('more-news', ['pagination' => get('page')]);
+    // }
 }
 ==
 {##}
+
 
 {% partial 'layout/page-title' %}
 
@@ -35,5 +40,5 @@ function onStart()
     {% content 'main' %}
 
     <h2>Новости</h2>
-    {% partial 'widgets/newsfeed' %}
+    {% partial 'widgets/newsfeed' pagination=get('page') %}
 {% endput %}

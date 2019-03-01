@@ -8,11 +8,12 @@ use Fw\Backend\Models\News as News;
 
 function onStart()
 {
-    $this['records'] = News::paginate(15, $this->param('slug')+2);
+    $this['records'] = News::paginate(15, $this->param('pagination')+2);
 }
 
 ==
 {##}
+
 {% for record in records %}
 <div class="grid-item">
     <article class="card newsfeed">
