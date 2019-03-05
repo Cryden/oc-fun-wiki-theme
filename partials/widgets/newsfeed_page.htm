@@ -4,16 +4,14 @@ use Fw\Backend\Models\News as News;
 function onStart()
 {
     $this['records'] = News::paginate(15, $this['pagination']);
-    $this['next_page'] = $this['pagination']+2;
+    $this['next_page'] = $this['pagination']+1;
+    $this['prev_page'] = $this['pagination']-1;
+    if ($this['next_page'] > $this['records']->lastPage()) {$this['next_page'] = 'end';}
+    if ($this['prev_page'] < 1) {$this['prev_page'] = 'start';}
+    //dd($this['records']);
 }
 ==
 {##}
-
-{{ pagination }}
-
-<script>
-$last_page = {{ records.lastPage }};
-</script>
 
 {% for record in records %}
 <div class="grid-item">
@@ -22,7 +20,7 @@ $last_page = {{ records.lastPage }};
             <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             <div class="news">
                 <div class="news__date"> {{ record.updated_at|ru_date }}</div>
-                <h1> {{ record.title }} </h1>
+                <h1> {{ record.id}} - {{ record.title }} </h1>
                 <div class="news__tag"> #{{ record.universe.name }} </div>
                 <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
@@ -32,5 +30,10 @@ $last_page = {{ records.lastPage }};
 {% endfor %}
 
 <p class="pagination">
-  <a class="pagination__next" href="/?page={{ next_page }}">Next page</a>
+{% if next_page != 'end' %}
+  <a class="pagination__next" href="/?page={{ next_page }}">Next page{{ next_page }}</a>
+{% endif %}
+{% if prev_page != 'start' %}
+  <a class="pagination__prev" href="/?page={{ prev_page }}">Prev page{{ prev_page }}</a>
+{% endif %}
 </p>

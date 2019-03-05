@@ -1,10 +1,20 @@
 ==
+function onStart()
+{
+    if(get('page') === null) { 
+        $this['pagination'] = 1;
+    } else {
+        $this['pagination'] = get('page');
+    }
+
+    //dd($this['pagination']);
+}
 ==
 {##}
 <div class="grid">
 <div class="grid-sizer"></div>
 <div class="gutter-sizer"></div>
-    {% partial "widgets/newsfeed_page" pagination=this.pagination %}
+    {% partial "widgets/newsfeed_page" pagination=pagination %}
 </div>
 
 <div class="page-load-status">
@@ -44,7 +54,8 @@ $(document).ready(function () {
         append: '.grid-item',
         outlayer: iso,
         status: '.page-load-status',
-        // history: 'push'
+        history: 'push',
+        debug: true
     });
 });
 </script>
