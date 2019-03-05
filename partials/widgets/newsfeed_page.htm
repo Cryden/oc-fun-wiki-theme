@@ -4,8 +4,7 @@ use Fw\Backend\Models\News as News;
 function onStart()
 {
     $this['records'] = News::paginate(15, $this['pagination']);
-    $this['next_page'] = $this['pagination']+1;
-    $this['prev_page'] = $this['pagination']+1;
+    $this['next_page'] = $this['pagination']+2;
 }
 ==
 {##}
