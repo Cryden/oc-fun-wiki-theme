@@ -20,11 +20,15 @@ function onStart()
             <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             <div class="news">
                 <div class="news__date"> {{ record.updated_at|ru_date }}</div>
-                <h1> {{ record.title }} </h1>
+                <h5> {{ record.title }} </h5>
                 <div class="news__tag"> #{{ record.universe.name }} </div>
                 <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
         </a>
+        <div class="news news__comment_count">
+            <i class="icon-comment"> </i>
+            <a class="comment_count" href="/news/{{ record.slug }}#disqus_thread"></a>
+        </div>
     </article>
 </div>
 {% endfor %}
@@ -32,6 +36,8 @@ function onStart()
 <p class="pagination">
 {% if next_page != 'end' %}
   <a class="pagination__next" href="/?page={{ next_page }}">Next page{{ next_page }}</a>
+{% else %}
+    <a class="pagination__next" href="/">Next page{{ next_page }}</a>
 {% endif %}
 {% if prev_page != 'start' %}
   <a class="pagination__prev" href="/?page={{ prev_page }}">Prev page{{ prev_page }}</a>
