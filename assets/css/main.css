@@ -467,22 +467,22 @@ template {
   content: '\F105'; }
 
 .icon-person:before {
-  content: '\F103'; }
-
-.icon-vk:before {
-  content: '\F10e'; }
-
-.icon-facebook:before {
-  content: '\F109'; }
-
-.icon-twitter:before {
   content: '\F104'; }
 
-.icon-instagram:before {
+.icon-vk:before {
+  content: '\F102'; }
+
+.icon-facebook:before {
+  content: '\F10d'; }
+
+.icon-twitter:before {
   content: '\F107'; }
 
-.icon-google:before {
+.icon-instagram:before {
   content: '\F10a'; }
+
+.icon-google:before {
+  content: '\F10e'; }
 
 .icon-news::before {
   content: '\F10b'; }
@@ -491,7 +491,7 @@ template {
   content: '\F10f'; }
 
 .icon-person::before {
-  content: '\F103'; }
+  content: '\F104'; }
 
 .icon-persons::before {
   content: '\F101'; }
@@ -500,16 +500,16 @@ template {
   content: '\F106'; }
 
 .icon-in_progress::before {
-  content: '\F108'; }
+  content: '\F109'; }
 
 .icon-dropdown::before {
   content: '\F10c'; }
 
 .icon-company::before {
-  content: '\F102'; }
+  content: '\F103'; }
 
 .icon-comment::before {
-  content: '\F10d'; }
+  content: '\F108'; }
 
 a {
   text-decoration: none; }
