@@ -3,7 +3,7 @@ use Fw\Backend\Models\News as News;
 
 function onStart()
 {
-    $this['records'] = News::paginate(15, $this['pagination']);
+    $this['records'] = News::orderBy('UPDATED_AT', 'desc')->paginate(15, $this['pagination']);
     $this['next_page'] = $this['pagination']+1;
     $this['prev_page'] = $this['pagination']-1;
     if ($this['next_page'] > $this['records']->lastPage()) {$this['next_page'] = 'end';}
