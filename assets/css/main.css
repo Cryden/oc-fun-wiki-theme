@@ -467,22 +467,22 @@ template {
   content: '\F105'; }
 
 .icon-person:before {
-  content: '\F104'; }
+  content: '\F103'; }
 
 .icon-vk:before {
-  content: '\F102'; }
+  content: '\F10e'; }
 
 .icon-facebook:before {
-  content: '\F10d'; }
+  content: '\F109'; }
 
 .icon-twitter:before {
-  content: '\F107'; }
+  content: '\F104'; }
 
 .icon-instagram:before {
-  content: '\F10a'; }
+  content: '\F107'; }
 
 .icon-google:before {
-  content: '\F10e'; }
+  content: '\F10a'; }
 
 .icon-news::before {
   content: '\F10b'; }
@@ -491,7 +491,7 @@ template {
   content: '\F10f'; }
 
 .icon-person::before {
-  content: '\F104'; }
+  content: '\F103'; }
 
 .icon-persons::before {
   content: '\F101'; }
@@ -500,16 +500,16 @@ template {
   content: '\F106'; }
 
 .icon-in_progress::before {
-  content: '\F109'; }
+  content: '\F108'; }
 
 .icon-dropdown::before {
   content: '\F10c'; }
 
 .icon-company::before {
-  content: '\F103'; }
+  content: '\F102'; }
 
 .icon-comment::before {
-  content: '\F108'; }
+  content: '\F10d'; }
 
 a {
   text-decoration: none; }
@@ -707,7 +707,7 @@ header::-webkit-scrollbar {
   justify-content: space-between;
   width: 50px;
   padding: 10px; }
-  @media (min-width: 1200px) {
+  @media (min-width: 768px) {
     .mob_nav {
       width: 120px;
       padding: 40px; } }
@@ -717,7 +717,7 @@ header::-webkit-scrollbar {
   .mob_nav .logo {
     width: 30px;
     height: 30px; }
-    @media (min-width: 1200px) {
+    @media (min-width: 768px) {
       .mob_nav .logo {
         width: 40px;
         height: 40px; } }
@@ -730,11 +730,12 @@ header::-webkit-scrollbar {
     width: 30px;
     height: 30px;
     font-size: 16px; }
-    @media (min-width: 1200px) {
+    @media (min-width: 768px) {
       .mob_nav .burger {
         width: 40px;
         height: 40px;
-        font-size: 20px; } }
+        font-size: 20px;
+        margin-top: 40px; } }
   .mob_nav .social_buttons {
     width: 20px;
     text-align: center;
@@ -744,7 +745,7 @@ header::-webkit-scrollbar {
     justify-content: space-between;
     width: 30px;
     font-size: 16px; }
-    @media (min-width: 1200px) {
+    @media (min-width: 768px) {
       .mob_nav .social_buttons {
         font-size: 20px;
         width: 40px; } }
@@ -761,7 +762,7 @@ header::-webkit-scrollbar {
     height: 30px;
     padding: 7px 0;
     font-size: 16px; }
-    @media (min-width: 1200px) {
+    @media (min-width: 768px) {
       .mob_nav .login {
         width: 40px;
         height: 40px;
@@ -851,9 +852,6 @@ main {
   min-height: calc(100vh - 60px);
   margin-left: 50px; }
   @media (min-width: 768px) {
-    main {
-      margin-left: 50px; } }
-  @media (min-width: 1200px) {
     main {
       margin-left: 120px;
       min-height: calc(100vh - 100px); } }
@@ -1213,40 +1211,39 @@ footer {
         padding: 9px;
         font-size: 20px; } }
 
-.newsfeed h5 {
-  font-size: 20px;
-  line-height: 24px;
-  margin-bottom: 20px; }
-
-.newsfeed p {
-  font-size: 14px;
-  line-height: 21px; }
-
-.newsfeed img {
-  width: 100%; }
-
-.newsfeed .news {
-  padding: 10px; }
-  @media (min-width: 1200px) {
-    .newsfeed .news {
-      padding: 20px; } }
-  .newsfeed .news__date {
-    font-size: 14px;
-    font-weight: 300;
+.newsfeed {
+  background-color: #fff; }
+  .newsfeed h5 {
+    font-size: 20px;
+    line-height: 24px;
     margin-bottom: 20px; }
-  .newsfeed .news__tag {
+  .newsfeed p {
     font-size: 14px;
-    font-weight: 600;
-    color: #FB6464;
-    margin-bottom: 20px;
-    text-transform: uppercase; }
-  .newsfeed .news__comment_count {
-    display: flex;
-    font-size: 20px; }
-    .newsfeed .news__comment_count .comment_count {
+    line-height: 21px; }
+  .newsfeed img {
+    width: 100%; }
+  .newsfeed .news {
+    padding: 10px; }
+    @media (min-width: 1200px) {
+      .newsfeed .news {
+        padding: 20px; } }
+    .newsfeed .news__date {
       font-size: 14px;
-      margin-left: 10px;
-      line-height: 20px; }
+      font-weight: 300;
+      margin-bottom: 20px; }
+    .newsfeed .news__tag {
+      font-size: 14px;
+      font-weight: 600;
+      color: #FB6464;
+      margin-bottom: 20px;
+      text-transform: uppercase; }
+    .newsfeed .news__comment_count {
+      display: flex;
+      font-size: 20px; }
+      .newsfeed .news__comment_count .comment_count {
+        font-size: 14px;
+        margin-left: 10px;
+        line-height: 20px; }
 
 
 /*# sourceMappingURL=main.css.map*/
