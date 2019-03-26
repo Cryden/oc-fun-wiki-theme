@@ -32,10 +32,10 @@
 
 // media devices
 
-$mobile-width: 426px
-$tablet-width: 768px
-$laptop-width: 1200px
-$desktop-width: 1600px
+$mobile-width: 425px
+$tablet-width: 1023px
+$laptop-width: 1439px
+
 
 =default
 	@content
@@ -45,13 +45,13 @@ $desktop-width: 1600px
 		@content
 
 =tablet
-	@media (min-width: #{$tablet-width})
+	@media (min-width: #{$mobile-width + 1}) and (max-width: #{$tablet-width})
 		@content
 
 =laptop
-	@media (min-width: #{$laptop-width})
+	@media (min-width: #{$tablet-width + 1}) and (max-width: #{$laptop-width})
 		@content
 
 =desktop
-	@media (min-width: #{$desktop-width})
+	@media (min-width: #{$laptop-width + 1})
 		@content
