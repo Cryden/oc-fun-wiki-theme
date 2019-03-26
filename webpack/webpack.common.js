@@ -31,6 +31,7 @@ module.exports = {
                         }
                     },
                     'css-loader',
+                    'group-css-media-queries-loader',
                     'icon-font-loader',
                     'sass-loader'
                 ]
