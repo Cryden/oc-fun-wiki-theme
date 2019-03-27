@@ -974,53 +974,7 @@ footer {
         font-size: 14px;
         margin-left: 10px;
         line-height: 20px; }
-      @media (min-width: 1440px) {
-    .infostring {
-      font-size: 16px; }
-    header {
-      left: 0 !important;
-      box-shadow: 0px 0px 250px rgba(147, 164, 171, 0.3); }
-      header .social_buttons {
-        margin: 0 60px;
-        text-align: center;
-        color: #93A4AB;
-        position: fixed;
-        bottom: 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 200px;
-        font-size: 20px; }
-    .mob_nav {
-      display: none; }
-      .main-logo__title {
-        font-size: 12px; }
-    main {
-      margin-left: 320px;
-      padding-top: 0; }
-      main .content {
-        margin-left: 80px;
-        margin-right: 60px; }
-    footer {
-      margin-left: 320px; }
-
-}
-      @media (max-width: 425px) {
-    h2 {
-      font-size: 18px; }
-    h3 {
-      font-size: 14px; }
-      .universe-cover__shadow {
-        height: 60%;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 50%, #fff 100%); }
-      .universe-cover__logo {
-        position: relative;
-        width: 200px;
-        left: calc(50% - 100px);
-        bottom: 40px; }
-
-}
-      @media (min-width: 426px) and (max-width: 1023px) {
+      @media (min-width: 426px) {
     h1 {
       font-size: 24px; }
     p {
@@ -1102,7 +1056,7 @@ footer {
         right: 30px; }
 
 }
-      @media (min-width: 1024px) and (max-width: 1439px) {
+      @media (min-width: 1024px) {
     h1 {
       heigh: 40px;
       line-height: 40px;
@@ -1162,6 +1116,52 @@ footer {
         font-size: 20px; }
       .newsfeed .news {
         padding: 20px; }
+
+}
+      @media (min-width: 1440px) {
+    .infostring {
+      font-size: 16px; }
+    header {
+      left: 0 !important;
+      box-shadow: 0px 0px 250px rgba(147, 164, 171, 0.3); }
+      header .social_buttons {
+        margin: 0 60px;
+        text-align: center;
+        color: #93A4AB;
+        position: fixed;
+        bottom: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 200px;
+        font-size: 20px; }
+    .mob_nav {
+      display: none; }
+      .main-logo__title {
+        font-size: 12px; }
+    main {
+      margin-left: 320px;
+      padding-top: 0; }
+      main .content {
+        margin-left: 80px;
+        margin-right: 60px; }
+    footer {
+      margin-left: 320px; }
+
+}
+      @media (max-width: 425px) {
+    h2 {
+      font-size: 18px; }
+    h3 {
+      font-size: 14px; }
+      .universe-cover__shadow {
+        height: 60%;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 50%, #fff 100%); }
+      .universe-cover__logo {
+        position: relative;
+        width: 200px;
+        left: calc(50% - 100px);
+        bottom: 40px; }
 
 }
 
