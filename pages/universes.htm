@@ -50,3 +50,11 @@ $this['records'] = Universe::orderBy('name', 'asc')->get();
     {% endfor %}
 </div>
 {% endput %}
+
+{% put sidebar_top %}
+{% endput %}
+
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
