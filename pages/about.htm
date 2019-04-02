@@ -1,0 +1,36 @@
+title = "about"
+url = "/about"
+layout = "default"
+is_hidden = 0
+==
+function onStart()
+{
+    $this['page_title'] = "О проекте";
+
+    $this['page_description'] = "Энциклопедия фантастических вселенных - про­ект пос­вя­щен­ный фантастике. Ко­миксы, книги, филь­мы, се­ри­алы, нас­толь­ные игры, ви­деоиг­ры.";
+    
+    $this['content'] = "about";
+    
+    // og_meta properties
+    $this['og_meta'] = [
+      "title" => "О проекте",
+      "description" => $this['page_description'],
+      "image" => Url::to('themes/fun-wiki/assets/images/alpha.jpg'),
+      "type" => 'webpage',
+      "url" =>  Request::url(),
+    ];
+    
+    // Shema.org
+    $this['shema_type'] = "shema/website";
+}
+==
+{##}
+
+
+{% partial 'layout/page-title' %}
+
+<img class="page__main-full" src="{{ 'main-cover.png'|media }}" alt="fun alpha" />
+
+{% put one_column %}
+    {% content 'main' %}
+{% endput %}
