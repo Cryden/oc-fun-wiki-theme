@@ -21,7 +21,7 @@ function onStart()
             <div class="news">
                 <div class="news__date"> {{ record.updated_at|ru_date }}</div>
                 <h5> {{ record.title }} </h5>
-                <div class="news__tag"> #{{ record.universe.name }} </div>
+                <div class="news__tag"><a href="/{{ record.universe.slug }}">#{{ record.universe.name }}</a></div>
                 <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
         </a>

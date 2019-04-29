@@ -979,6 +979,8 @@ footer {
       color: #FB6464;
       margin-bottom: 20px;
       text-transform: uppercase; }
+      .newsfeed .news__tag a {
+        color: #FB6464; }
     .newsfeed .news__comment_count {
       display: flex;
       font-size: 20px; }
