@@ -49,9 +49,16 @@ function onStart()
 {% endput %}
 
 {% put content %}
-    <div class="news__cover">
-        <img src="{{ record.cover.path }}" alt="{{ record.title }}"/>
+    {% if record.news_type == "news" %}
+        <div class="news__cover">
+            <img src="{{ record.cover.path }}" alt="{{ record.title }}"/>
+        </div>
+    {% endif %}
+    {% if record.news_type == "trailer" %}
+    <div class="videoWrapper">
+        <iframe src="{{ record.link }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
+    {% endif %}
     <div class="news__description">
         {{ record.description|raw }}
     </div>
