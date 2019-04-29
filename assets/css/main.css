@@ -976,11 +976,11 @@ footer {
     .newsfeed .news__tag {
       font-size: 14px;
       font-weight: 600;
-      color: #FB6464;
+      color: #ba2d0b;
       margin-bottom: 20px;
       text-transform: uppercase; }
       .newsfeed .news__tag a {
-        color: #FB6464; }
+        color: #ba2d0b; }
     .newsfeed .news__comment_count {
       display: flex;
       font-size: 20px; }

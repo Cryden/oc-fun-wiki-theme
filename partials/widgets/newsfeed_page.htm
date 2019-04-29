@@ -16,7 +16,7 @@ function onStart()
 {% for record in records %}
 <div class="grid-item">
     <article class="card newsfeed">
-        <a href="/news/{{ record.slug }}">
+        <a href="/news/{{ record.slug }}" aria-label="Read more..">
             <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             <div class="news">
                 <div class="news__date"> {{ record.updated_at|ru_date }}</div>
@@ -27,7 +27,7 @@ function onStart()
         </a>
         <div class="news news__comment_count">
             <i class="icon-comment"> </i>
-            <a class="comment_count" href="/news/{{ record.slug }}#disqus_thread"></a>
+            <a class="comment_count" href="/news/{{ record.slug }}#disqus_thread" aria-hidden="true"></a>
         </div>
     </article>
 </div>
