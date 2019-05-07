@@ -1,0 +1,43 @@
+;;
+
+title = "book"
+url = "/:universe/books/:slug"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Universe as Universe;
+use \fw\Backend\Models\Book as Book;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "left-sidebar";
+
+    $this['record'] = Book::whereHas('universe', function($query) {
+        $query->where('slug', '=',  $this->param('universe'));
+    })
+    ->where('slug', '=', $this->param('slug'))
+    ->with('book_editions')
+    ->with('authors')
+    ->first();
+
+    $this['universe'] = $this->param('universe');
+
+    $this['page_title'] = $this['record']->title;
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+    {{ record.title }}
+    {% for book in record.books %}
+        <div class="list_item">
+            {{ book.title }}
+        </div>
+    {% endfor %}
+{% endput %}

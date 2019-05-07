@@ -24,6 +24,8 @@ function onStart()
     ->get();
 
     $this['page_title'] = "Книги";
+
+    $this['universe'] = $this->param('universe');
 }
 
 ==
@@ -53,7 +55,7 @@ function onStart()
     {% endif %}
     <div class="card-item">
         <div class="card">
-            <a href="/{{ record.slug }}">
+            <a href="/{{universe}}/books/{{ record.slug }}">
                 <div class="card__content">
                     <h4>{{ record.title }}</h4>
                     <div class="h4-subtitle"> {{ record.name_translate }} </div>
