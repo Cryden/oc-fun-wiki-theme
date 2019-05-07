@@ -1,0 +1,77 @@
+;;
+
+title = "books"
+url = "/:universe/books"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Book as Book;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "right-sidebar";
+
+    $this['records'] = Book::whereHas('universe', function($query) {
+        $query->where('slug', '=',  $this->param('universe'));
+    })
+    ->with('book_editions')
+    ->with('authors')
+    ->orderBy('number_in_series', 'asc')
+    ->orderBy('book_series_id', "ASC NULLS LAST")
+    ->get();
+
+    $this['page_title'] = "Книги";
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+
+{% set last_char = '' %}
+{% for record in records %}
+
+{% if record.book_series.title == '' %}
+    {% set series = 'Вне серии' %}
+{% else %}
+    {% set series = record.book_series.title %}
+{% endif %}
+
+{% set this_char = series %}
+{% if this_char != last_char %}
+{% if last_char != '' %}
+</div>
+{% endif %}
+{% set last_char = this_char%}
+<h2> {{ this_char }} </h2>
+<div class="card_list">
+    {% endif %}
+    <div class="card-item">
+        <div class="card">
+            <a href="/{{ record.slug }}">
+                <div class="card__content">
+                    <h4>{{ record.title }}</h4>
+                    <div class="h4-subtitle"> {{ record.name_translate }} </div>
+
+                    {{ record.authors[0].title }}
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endput %}
+
+{% put sidebar_top %}
+{% endput %}
+
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
