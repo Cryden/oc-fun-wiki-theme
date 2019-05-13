@@ -56,7 +56,12 @@ function onStart()
     <div class="card-item">
         <div class="card">
             <a href="/{{universe}}/books/{{ record.slug }}">
+                <div class="card__image">
+                    <img src="{{ record.book_editions[0].cover|media }}" alt="{{ record.name }}" />
+                </div>
                 <div class="card__content">
+                
+                    
                     <h4>{{ record.title }}</h4>
                     <div class="h4-subtitle"> {{ record.name_translate }} </div>
 
