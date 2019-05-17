@@ -19,7 +19,7 @@ function onStart()
         <a href="/news/{{ record.slug }}" aria-label="Read more..">
             <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             <div class="news">
-                <div class="news__date"> {{ record.updated_at|ru_date }}</div>
+                <div class="news__date"> {{ record.created_at|ru_date }}</div>
                 <h5> {{ record.title }} </h5>
                 <div class="news__tag"><a href="/{{ record.universe.slug }}">#{{ record.universe.name }}</a></div>
                 <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
