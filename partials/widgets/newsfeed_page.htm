@@ -25,9 +25,15 @@ function onStart()
                 <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
         </a>
-        <div class="news news__comment_count">
-            <i class="icon-comment"> </i>
-            <a class="comment_count" href="/news/{{ record.slug }}#disqus_thread" aria-hidden="true"></a>
+        <div class="news news__counters">
+            <div class="counter">
+                <i class="icon-comment"> </i>
+                <a class="count" href="/news/{{ record.slug }}#disqus_thread" aria-hidden="true"></a>
+            </div>
+            <div class="counter">
+                <i class="icon-visitors"> </i>
+                <span class="count">{{ record.visitors }}</span>
+            </div>
         </div>
     </article>
 </div>

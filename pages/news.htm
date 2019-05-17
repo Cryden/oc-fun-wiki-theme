@@ -8,6 +8,7 @@ security = "all"
 
 ==
 use fw\Backend\Models\News as News;
+use \Fw\Backend\Classes\GoogleServices;
 
 function onStart()
 {
@@ -36,6 +37,15 @@ function onStart()
         "type" => '',
         "url" => Request::url(),
     ];
+
+    $this['visitors'] = GoogleServices::getVisitors('/'.Request::path());
+
+
+    if ($this['visitors'] > $this['record']->visitors) {
+        $news = News::find($this['record']->id);
+        $news->visitors = $this['visitors'];
+        $news->save();
+    }
 
 }
 
