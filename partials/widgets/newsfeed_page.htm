@@ -1,9 +1,16 @@
 ==
 use Fw\Backend\Models\News as News;
+use Fw\Backend\Models\Content as Content;
 
 function onStart()
 {
-    $this['records'] = News::orderBy('created_at', 'desc')->paginate(15, $this['pagination']);
+    $this['records'] = Content::with(['contentable' => function ($query) {
+        //$query->where('status', 'published');
+    }])->where(['contentable_type' => 'fw\Backend\Models\News', 'status' => 'published'])->orderBy('published_at', 'desc')->paginate(15, $this['pagination']);
+    // $this['records'] = News::leftJoin('content', function ($query){
+
+    // })->paginate(15, $this['pagination']);
+    // dump($this['records']);
     $this['next_page'] = $this['pagination']+1;
     $this['prev_page'] = $this['pagination']-1;
     if ($this['next_page'] > $this['records']->lastPage()) {$this['next_page'] = 'end';}
@@ -16,23 +23,25 @@ function onStart()
 {% for record in records %}
 <div class="grid-item">
     <article class="card newsfeed">
-        <a href="/news/{{ record.slug }}" aria-label="Read more..">
-            <img src="{{ record.cover.path|resize(300) }}" alt="{{ record.title }} "/>
+        
+            <img src="{{ record.contentable.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             <div class="news">
                 <div class="news__date"> {{ record.created_at|ru_date }}</div>
+                <a href="{{ record.permalink }}" aria-label="Read more..">
                 <h5> {{ record.title }} </h5>
-                <div class="news__tag"><a href="/{{ record.universe.slug }}">#{{ record.universe.name }}</a></div>
-                <p>{{ record.description|raw|slice(0, 160)|striptags }}...</p>
+                </a>
+                <div class="news__tag"><a href="/{{ record.contentable.universe.slug }}">#{{ record.contentable.universe.name }}</a></div>
+                <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
-        </a>
+        
         <div class="news news__counters">
             <div class="counter">
                 <i class="icon-comment"> </i>
-                <a class="count" href="/news/{{ record.slug }}#disqus_thread" aria-hidden="true"></a>
+                <a class="count" href="{{ record.permalink }}#disqus_thread" aria-hidden="true"></a>
             </div>
             <div class="counter">
                 <i class="icon-visitors"> </i>
-                <span class="count">{{ record.visitors }}</span>
+                <span class="count">{{ record.contentable.visitors }}</span>
             </div>
         </div>
     </article>
