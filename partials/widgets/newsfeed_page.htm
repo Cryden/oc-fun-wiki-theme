@@ -30,7 +30,7 @@ function onStart()
                 <a href="{{ record.permalink }}" aria-label="Read more..">
                 <h5> {{ record.title }} </h5>
                 </a>
-                <div class="news__tag"><a href="/{{ record.contentable.universe.slug }}">#{{ record.contentable.universe.name }}</a></div>
+                <div class="news__tag"><a href="{{ record.contentable.universe.content.permalink }}">#{{ record.contentable.universe.content.title }}</a></div>
                 <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
         
