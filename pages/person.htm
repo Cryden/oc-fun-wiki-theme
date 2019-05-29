@@ -26,8 +26,8 @@ function onStart()
         return \Redirect::to('404');
     };
 
-    if ($this['person']->is_pseudo ) {
-        return Redirect::to('person/'.$this['record']->pseudos[0]->slug);
+    if ($this['person']->is_pseudo) {
+        return Redirect::to($this['person']->pseudos[0]->content->permalink);
     }
 
     // SEO title
