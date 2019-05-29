@@ -4,12 +4,12 @@
     "@context": "http://schema.org",
         "@type": "Person",
         "name" : "{{ record.title }}",
-        "jobTitle" : "{% if record.personroles is not empty %}{% for personrole in record.personroles %}{{ personrole.title }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}",
-        "birthDate" : "{{ record.birthdate }}",
+        "jobTitle" : "{% if person.personroles is not empty %}{% for personrole in person.personroles %}{{ personrole.title }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}",
+        "birthDate" : "{{ person.birthdate }}",
         "birthPlace" : "",
-        "deathDate" : {% if record.deathdata is not empty %}{{ record.deathdata }}{% else %}""{% endif %},
+        "deathDate" : {% if person.deathdata is not empty %}{{ person.deathdata }}{% else %}""{% endif %},
         "image": "{{ og_meta.image }}",
-        "description" : "{{ record.bio|slice(0, 160)|striptags }}",
-        "url": ""
+        "description" : "{{ person.bio|slice(0, 160)|striptags }}",
+        "url": "{{ og_meta.url }}"
     }
 </script>
