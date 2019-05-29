@@ -1,12 +1,13 @@
 ;;
 
 title = "organisation"
-url = "/organisation/:slug"
+url = "/company/:slug"
 layout = "default"
 is_hidden = 0
 
 ==
 use fw\Backend\Models\Organisation as Organisation;
+use fw\Backend\Models\Content;
 
 function onStart()
 {
@@ -15,7 +16,9 @@ function onStart()
     $this['template'] = "left-sidebar";
 
     // Get record
-    $this['record'] = Organisation::where('slug', '=', $this->param('slug'))->first();
+    // $this['record'] = Organisation::where('slug', '=', $this->param('slug'))->first();
+    $this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
+    $this['company'] = $this['record']->contentable;
 
     if ($this['record'] == null) {
         return \Redirect::to('404');
@@ -30,8 +33,8 @@ function onStart()
     // og_meta properties
     $this['og_meta'] = [
         "title" => $this['record']->title,
-        "description" => $this['record']->description,
-        "image" => Url::to('storage/app/media',$this['record']->logo),
+        "description" => $this['company']->description,
+        "image" => Url::to('storage/app/media',$this['company']->logo),
         "type" => '',
         "url" => Request::url(),
     ];
@@ -45,10 +48,10 @@ function onStart()
 
 {% put header_content %}
     <div class="person__title">
-        <h1> {{ record.name }} </h1>
+        <h1> {{ record.title }} </h1>
         <div class="subtitle">
-            {% if record.name_ru is not empty %}
-                {{ record.name_ru }}
+            {% if company.name_ru is not empty %}
+                {{ company.name_ru }}
             {% endif %}
         </div>
     </div>
@@ -56,24 +59,24 @@ function onStart()
 
 {% put sidebar_top %}
     <div class="person__photo">
-        <img src="{{ record.logo|media }}" />
+        <img src="{{ company.logo|media }}" />
     </div>
 {% endput %}
 
 {% put content %}
     <div class="person__info">
         <div class="infostring">Дата основания:
-            <b>{{ record.open_date|ru_date }}</b>
+            <b>{{ company.open_date|ru_date }}</b>
         </div>
-        {% if record.closed_date %}
+        {% if company.closed_date %}
             <div class="infostring">Дата закрытия:
-                <b>{{ record.closed_date|ru_date }}</b>
+                <b>{{ company.closed_date|ru_date }}</b>
             </div>
         {% endif %}
     </div>
 
     <h2>Информация об организации</h2>
-    {{ record.description|raw }}
+    {{ company.description|raw }}
 {% endput %}
 
 {% put sidebar_bottom %}
