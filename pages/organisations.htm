@@ -8,6 +8,7 @@ is_hidden = 0
 ==
 
 use Fw\Backend\Models\Organisation as Organisation;
+use Fw\Backend\Models\Content;
 
 function onStart()
 {
@@ -16,7 +17,16 @@ function onStart()
 
     $this['page_title'] = "Компании";
 
-    $this['records'] = Organisation::where('complete', '>', 60)->orderBy('title', 'asc')->get();
+    // $this['records'] = Organisation::where('complete', '>', 60)->orderBy('title', 'asc')->get();
+
+    $this['records'] = Content::where(['contentable_type' => 'fw\Backend\Models\Organisation', 'status' => 'published'])
+        ->with(['contentable' => function ($query) {
+            $query->where('complete', '>', 60);
+        }])
+        ->orderBy('title', 'asc')
+        ->get();
+
+    // dump($this['records']);
 }
 
 ==
@@ -37,7 +47,7 @@ function onStart()
             <div class="list">
         {% endif %}
         <div class="list_item">
-            <a href="/organisation/{{record.slug}}">
+            <a href="{{record.permalink}}">
                 {{ record.title }}
             </a>
         </div>
