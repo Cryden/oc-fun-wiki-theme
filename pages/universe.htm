@@ -9,6 +9,7 @@ is_hidden = 0
 
 use Fw\Backend\Models\Universe as Universe;
 use Fw\Backend\Models\Book as Book;
+use Fw\Backend\Models\Content;
 
 function onStart()
 {
@@ -17,7 +18,8 @@ $this['template'] = "right-sidebar";
 
 // Get record
 $this['universe'] = $this->param('slug');
-$this['record'] = Universe::where('slug', '=', $this->param('slug'))->first();
+// $this['record'] = Universe::where('slug', '=', $this->param('slug'))->first();
+$this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
 
 if ($this['record'] == null) {
 return \Redirect::to('404');
@@ -54,48 +56,48 @@ $this['sidebar'] = "person/author/sidebar";
 
 <div class="universe-cover">
     <div class="universe-cover__image">
-        <img src="{{ record.cover|media }}" alt="{{ record.name }} cover">
+        <img src="{{ record.contentable.cover|media }}" alt="{{ record.title }} cover">
     </div>
     <div class="universe-cover__logo">
-        <img src="{{ record.logo|media }}" alt="{{ record.name }} logo">
+        <img src="{{ record.contentable.logo|media }}" alt="{{ record.title }} logo">
     </div>
 </div>
 
 {% put header_content %}
-    <h1 class="universe__title">{{ record.name }}</h1>
-    <div class="universe__subtitle">{{ record.name_translate }}</div>
+    <h1 class="universe__title">{{ record.title }}</h1>
+    <div class="universe__subtitle">{{ record.contentable.name_translate }}</div>
 {% endput %}
 
 {% put content %}
     <div class="universe__description">
-        {{ record.description|raw }}
+        {{ record.contentable.description|raw }}
     </div>
 {% endput %}
 
 {% put sidebar_top %}
 <div id="universe-info" class="sidebar-block">
     <div class="infostring">
-        <b>Год создания:</b> {{ record.created_year }}
+        <b>Год создания:</b> {{ record.contentable.created_year }}
     </div>
 
     <div class="infostring">
         <b>Создатели:</b>
-        {% for person in record.persons %}
-        <a href="/person/{{ person.slug }}">
-            {{ person.title }}{% if not loop.last %}, {% endif %}
+        {% for person in record.contentable.persons %}
+        <a href="{{ person.content.permalink }}">
+            {{ person.content.title }}{% if not loop.last %}, {% endif %}
         </a>
         {% endfor %}
-        {% if (record.persons is not empty) and (record.organisations is not empty) %}, {% endif %}
-        {% for organisation in record.organisations %}
-        <a href="/organisation/{{ organisation.slug }}">
-            {{ organisation.title }}{% if not loop.last %}, {% endif %}
+        {% if (record.contentable.persons is not empty) and (record.contentable.organisations is not empty) %}, {% endif %}
+        {% for organisation in record.contentable.organisations %}
+        <a href="{{ organisation.content.permalink }}">
+            {{ organisation.content.title }}{% if not loop.last %}, {% endif %}
         </a>
         {% endfor %}
     </div>
 
     <div class="infostring">
         <b>Жанр:</b>
-        {% for genre in record.genres %}
+        {% for genre in record.contentable.genres %}
         {{ genre.title }}{% if not loop.last %}, {% endif %}
         {% endfor %}
     </div>

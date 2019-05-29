@@ -8,13 +8,18 @@ is_hidden = 0
 ==
 
 use fw\Backend\Models\Universe as Universe;
+use fw\Backend\Models\Content;
 
 function onStart()
 {
 $this['template'] = "right-sidebar";
 
 $this['page_title'] = "Вселенные";
-$this['records'] = Universe::orderBy('name', 'asc')->get();
+// $this['records'] = Universe::orderBy('name', 'asc')->get();
+
+$this['records'] = Content::with(['contentable' => function ($query) {
+        // $query->where('status', 'published');
+}])->where(['contentable_type' => 'fw\Backend\Models\Universe', 'status' => 'published'])->orderBy('title', 'asc')->get();
 }
 
 ==
@@ -25,7 +30,7 @@ $this['records'] = Universe::orderBy('name', 'asc')->get();
 {% put content %}
 {% set last_char = '' %}
 {% for record in records %}
-{% set this_char = record.name|first|upper %}
+{% set this_char = record.title|first|upper %}
 {% if this_char != last_char %}
 {% if last_char != '' %}
 </div>
@@ -36,13 +41,13 @@ $this['records'] = Universe::orderBy('name', 'asc')->get();
     {% endif %}
     <div class="card-item">
         <div class="card">
-            <a href="/{{ record.slug }}">
+            <a href="{{ record.permalink }}">
                 <div class="card__image">
-                    <img src="{{ record.cover|media|resize(530) }}" alt="{{ record.name }}" />
+                    <img src="{{ record.contentable.cover|media|resize(530) }}" alt="{{ record.title }}" />
                 </div>
                 <div class="card__content">
-                    <h4>{{ record.name }}</h4>
-                    <div class="h4-subtitle"> {{ record.name_translate }} </div>
+                    <h4>{{ record.title }}</h4>
+                    <div class="h4-subtitle"> {{ record.contentable.name_translate }} </div>
                 </div>
             </a>
         </div>
