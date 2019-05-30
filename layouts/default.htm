@@ -15,7 +15,7 @@ security = "all"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ page_title }} | Энциклопедия фантастических вселенных</title>
-    <meta name="description" content="{{ page_description }}">
+    <meta name="description" content="{{ page_description|slice(0, 160)|striptags }}">
     <base href="{{ '/' }}">
     {% partial "meta/verification" %}
     {% partial "meta/og_meta" %}

@@ -17,30 +17,31 @@ function onStart()
 $this['template'] = "right-sidebar";
 
 // Get record
-$this['universe'] = $this->param('slug');
-// $this['record'] = Universe::where('slug', '=', $this->param('slug'))->first();
+
+
 $this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
+$this['universe'] = $this['record']->contentable;
 
 if ($this['record'] == null) {
 return \Redirect::to('404');
 };
 
-$this['book'] = Book::whereHas('universe', function($query) {
-    $query->where('slug', '=',  $this->param('slug'));
-})
-->count();
+// $this['book'] = Book::whereHas('universe', function($query) {
+//     $query->where('slug', '=',  $this->param('slug'));
+// })
+// ->count();
 
 // SEO title
-$this['page_title'] = $this['record']->name;
-
+$this['page_title'] = $this['record']->title;
+$this['page_description'] = $this['universe']->description;
 // Shema.org properties
 //$this['shema_type'] = "person/shema";
 
 // og_meta properties
 $this['og_meta'] = [
-"title" => $this['record']->name,
-"description" => $this['record']->description,
-"image" => Url::to('storage/app/media',$this['record']->cover),
+"title" => $this['record']->title,
+"description" => $this['universe']->description,
+"image" => Url::to('storage/app/media',$this['universe']->cover),
 "type" => '',
 "url" => Request::url(),
 ];
@@ -56,48 +57,50 @@ $this['sidebar'] = "person/author/sidebar";
 
 <div class="universe-cover">
     <div class="universe-cover__image">
-        <img src="{{ record.contentable.cover|media }}" alt="{{ record.title }} cover">
+        <img src="{{ universe.cover|media }}" alt="{{ record.title }} cover">
     </div>
     <div class="universe-cover__logo">
-        <img src="{{ record.contentable.logo|media }}" alt="{{ record.title }} logo">
+        <img src="{{ universe.logo|media }}" alt="{{ record.title }} logo">
     </div>
 </div>
 
 {% put header_content %}
     <h1 class="universe__title">{{ record.title }}</h1>
-    <div class="universe__subtitle">{{ record.contentable.name_translate }}</div>
+    <div class="universe__subtitle">{{ universe.name_translate }}</div>
 {% endput %}
 
 {% put content %}
     <div class="universe__description">
-        {{ record.contentable.description|raw }}
+        {{ universe.description|raw }}
     </div>
 {% endput %}
 
 {% put sidebar_top %}
 <div id="universe-info" class="sidebar-block">
     <div class="infostring">
-        <b>Год создания:</b> {{ record.contentable.created_year }}
+        <b>Год создания:</b> {{ universe.created_year }}
     </div>
 
     <div class="infostring">
         <b>Создатели:</b>
-        {% for person in record.contentable.persons %}
-        <a href="{{ person.content.permalink }}">
-            {{ person.content.title }}{% if not loop.last %}, {% endif %}
+        {% for persons in universe.persons %}
+        {% set person = persons.content %}
+        <a href="{{ person.permalink }}">
+            {{ person.title }}{% if not loop.last %}, {% endif %}
         </a>
         {% endfor %}
-        {% if (record.contentable.persons is not empty) and (record.contentable.organisations is not empty) %}, {% endif %}
-        {% for organisation in record.contentable.organisations %}
-        <a href="{{ organisation.content.permalink }}">
-            {{ organisation.content.title }}{% if not loop.last %}, {% endif %}
+        {% if (universe.persons is not empty) and (universe.organisations is not empty) %}, {% endif %}
+        {% for organisations in universe.organisations %}
+        {% set company = organisations.content %}
+        <a href="{{ company.permalink }}">
+            {{ company.title }}{% if not loop.last %}, {% endif %}
         </a>
         {% endfor %}
     </div>
 
     <div class="infostring">
         <b>Жанр:</b>
-        {% for genre in record.contentable.genres %}
+        {% for genre in universe.genres %}
         {{ genre.title }}{% if not loop.last %}, {% endif %}
         {% endfor %}
     </div>
