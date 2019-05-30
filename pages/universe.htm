@@ -89,9 +89,9 @@ $this['sidebar'] = "person/author/sidebar";
             {{ person.title }}{% if not loop.last %}, {% endif %}
         </a>
         {% endfor %}
-        {% if (universe.persons is not empty) and (universe.organisations is not empty) %}, {% endif %}
-        {% for organisations in universe.organisations %}
-        {% set company = organisations.content %}
+        {% if (universe.persons is not empty) and (universe.company is not empty) %}, {% endif %}
+        {% for companys in universe.company %}
+        {% set company = companys.content %}
         <a href="{{ company.permalink }}">
             {{ company.title }}{% if not loop.last %}, {% endif %}
         </a>
