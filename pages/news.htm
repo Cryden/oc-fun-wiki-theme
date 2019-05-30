@@ -19,6 +19,8 @@ function onStart()
     // Get record
     $this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
 
+    // dd($this['record']);
+
     if ($this['record'] == null) {
         return \Redirect::to('404');
     };
