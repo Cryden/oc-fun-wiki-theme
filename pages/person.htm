@@ -45,6 +45,8 @@ function onStart()
         "url" => Request::url(),
     ];
 
+    $this['book_author'] = $this['person']->title;
+
     // dump(Request::url());
 
 }
