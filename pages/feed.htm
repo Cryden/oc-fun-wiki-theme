@@ -1,0 +1,59 @@
+;;
+
+title = "feed"
+url = "/feed"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Content;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "right-sidebar";
+
+    $this['page_title'] = "Новостная лента";
+
+    $this['records'] = Content::orderBy('published_at', 'desc')->get();
+
+    // dd($this['records']);
+
+    // $this['record_type'] = $this['records']->contentable_type;
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+    {% for record in records %}
+        <div class="list_item">
+            <a href="{{record.permalink}}">
+                {{ record.title }} - 
+            </a>
+            {% switch record.contentable_type %}
+                {% case 'news' %}
+                    News
+                {% case 'person' %}
+                    Person
+                {% case 'company' %}
+                    Company
+                {% case 'universe' %}
+                    Universe
+                {% default %}
+                    default
+            {% endswitch %}
+        </div>
+    {% endfor %}
+{% endput %}
+
+{% put sidebar_top %}
+{% endput %}
+
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}

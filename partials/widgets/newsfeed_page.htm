@@ -6,7 +6,7 @@ function onStart()
 {
     $this['records'] = Content::with(['contentable' => function ($query) {
         //$query->where('status', 'published');
-    }])->where(['contentable_type' => 'fw\Backend\Models\News', 'status' => 'published'])->orderBy('published_at', 'desc')->paginate(15, $this['pagination']);
+    }])->where(['contentable_type' => 'news', 'status' => 'published'])->orderBy('published_at', 'desc')->paginate(15, $this['pagination']);
     // $this['records'] = News::leftJoin('content', function ($query){
 
     // })->paginate(15, $this['pagination']);
