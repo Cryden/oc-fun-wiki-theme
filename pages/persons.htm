@@ -19,7 +19,7 @@ function onStart()
 
     // $this['records'] = Person::where('complete', '>', 60)->orderBy('title', 'asc')->get();
 
-    $this['records'] = Content::where(['contentable_type' => 'fw\Backend\Models\Person', 'status' => 'published'])
+    $this['records'] = Content::where(['contentable_type' => 'person', 'status' => 'published'])
         ->with(['contentable' => function ($query) {
             //$query->where('complete', '>', 60);
         }])

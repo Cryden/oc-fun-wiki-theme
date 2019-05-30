@@ -19,7 +19,7 @@ $this['page_title'] = "Вселенные";
 
 $this['records'] = Content::with(['contentable' => function ($query) {
         // $query->where('status', 'published');
-}])->where(['contentable_type' => 'fw\Backend\Models\Universe', 'status' => 'published'])->orderBy('title', 'asc')->get();
+}])->where(['contentable_type' => 'universe', 'status' => 'published'])->orderBy('title', 'asc')->get();
 }
 
 ==
