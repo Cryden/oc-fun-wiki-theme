@@ -66,7 +66,7 @@ $this['sidebar'] = "person/author/sidebar";
 
 {% put header_content %}
     <h1 class="universe__title">{{ record.title }}</h1>
-    <div class="universe__subtitle">{{ universe.name_translate }}</div>
+    <div class="universe__subtitle">{{ universe.title_ru }}</div>
 {% endput %}
 
 {% put content %}
@@ -78,7 +78,7 @@ $this['sidebar'] = "person/author/sidebar";
 {% put sidebar_top %}
 <div id="universe-info" class="sidebar-block">
     <div class="infostring">
-        <b>Год создания:</b> {{ universe.created_year }}
+        <b>Год создания:</b> {{ universe.created_at_date }}
     </div>
 
     <div class="infostring">

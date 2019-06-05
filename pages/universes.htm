@@ -47,7 +47,7 @@ $this['records'] = Content::with(['contentable' => function ($query) {
                 </div>
                 <div class="card__content">
                     <h4>{{ record.title }}</h4>
-                    <div class="h4-subtitle"> {{ record.contentable.name_translate }} </div>
+                    <div class="h4-subtitle"> {{ record.contentable.title_ru }} </div>
                 </div>
             </a>
         </div>
