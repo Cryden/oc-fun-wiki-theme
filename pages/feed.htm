@@ -6,21 +6,25 @@ layout = "default"
 is_hidden = 0
 
 ==
-
-use Fw\Backend\Models\Content;
+use Fw\Backend\Models\Content as Content;
 
 function onStart()
 {
-    // Template
-    $this['template'] = "right-sidebar";
+    $this['page_title'] = "Новости сайта";
 
-    $this['page_title'] = "Новостная лента";
+    $this['content'] = "main";
 
-    $this['records'] = Content::orderBy('published_at', 'desc')->get();
-
-    // dd($this['records']);
-
-    // $this['record_type'] = $this['records']->contentable_type;
+    // og_meta properties
+    $this['og_meta'] = [
+      "title" => "Энциклопедия фантастических вселенных",
+      "description" => $this['page_description'],
+      "image" => Url::to('themes/fun-wiki/assets/images/alpha.jpg'),
+      "type" => 'webpage',
+      "url" =>  Request::url(),
+    ];
+    
+    // Shema.org
+    $this['shema_type'] = "shema/website";
 }
 
 ==
@@ -28,32 +32,7 @@ function onStart()
 
 {% partial 'layout/page-title' %}
 
-{% put content %}
-    {% for record in records %}
-        <div class="list_item">
-            <a href="{{record.permalink}}">
-                {{ record.title }} - 
-            </a>
-            {% switch record.contentable_type %}
-                {% case 'news' %}
-                    News
-                {% case 'person' %}
-                    Person
-                {% case 'company' %}
-                    Company
-                {% case 'universe' %}
-                    Universe
-                {% default %}
-                    default
-            {% endswitch %}
-        </div>
-    {% endfor %}
-{% endput %}
-
-{% put sidebar_top %}
-{% endput %}
-
-
-{% put sidebar_bottom %}
-    {% partial 'widgets/advertisment' %}
+{% put one_column %}
+    <h2>Новости</h2>
+    {% partial 'widgets/contentfeed' %}
 {% endput %}

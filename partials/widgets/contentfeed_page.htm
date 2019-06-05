@@ -1,0 +1,81 @@
+==
+use Fw\Backend\Models\Content as Content;
+
+function onStart()
+{
+    $this['records'] = Content::with(['contentable' => function ($query) {
+        //$query->where('status', 'published');
+    }])->where([['status', '=', 'published'], ['contentable_type', '!=', 'news']])->orderBy('published_at', 'desc')->paginate(15, $this['pagination']);
+    // $this['records'] = News::leftJoin('content', function ($query){
+
+    // })->paginate(15, $this['pagination']);
+    // dump($this['records']);
+    $this['next_page'] = $this['pagination']+1;
+    $this['prev_page'] = $this['pagination']-1;
+    if ($this['next_page'] > $this['records']->lastPage()) {$this['next_page'] = 'end';}
+    if ($this['prev_page'] < 1) {$this['prev_page'] = 'start';}
+    //dd($this['records']);
+}
+==
+{##}
+
+{% for record in records %}
+<div class="grid-item">
+    <article class="card newsfeed">
+
+    {% switch record.contentable_type %}
+        {% case 'news' %}
+            <img src="{{ record.contentable.cover.path|resize(300) }}" alt="{{ record.title }} "/>
+            <div class="news">
+                <div class="news__date"> {{ record.created_at|ru_date }}</div>
+                <a href="{{ record.permalink }}" aria-label="Read more..">
+                <h5> {{ record.title }} </h5>
+                </a>
+                <div class="news__tag"><a href="{{ record.contentable.universe.content.permalink }}">#{{ record.contentable.universe.content.title }}</a></div>
+                <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
+            </div>
+        {% case 'person' %}
+            <img src="{{ record.contentable.photo|media|resize(300) }}" alt="{{ record.title }} "/>
+            <div class="news">
+                <div class="news__date"> {{ record.created_at|ru_date }}</div>
+                <a href="{{ record.permalink }}" aria-label="Read more..">
+                <h5> {{ record.title }} </h5>
+                </a>
+                <p>{{ record.contentable.bio|raw|slice(0, 160)|striptags }}...</p>
+            </div>
+        {% case 'company' %}
+            <img src="{{ record.contentable.logo|media|resize(300) }}" alt="{{ record.title }} "/>
+            <div class="news">
+                <div class="news__date"> {{ record.created_at|ru_date }}</div>
+                <a href="{{ record.permalink }}" aria-label="Read more..">
+                <h5> {{ record.title }} </h5>
+                </a>
+                <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
+            </div>
+        {% case 'universe' %}
+            <img src="{{ record.contentable.cover|media|resize(300) }}" alt="{{ record.title }} "/>
+            <div class="news">
+                <div class="news__date"> {{ record.created_at|ru_date }}</div>
+                <a href="{{ record.permalink }}" aria-label="Read more..">
+                <h5> {{ record.title }} </h5>
+                </a>
+                <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
+            </div>
+        {% default %}
+            
+    {% endswitch %}
+       
+    </article>
+</div>
+{% endfor %}
+
+<p class="pagination">
+{% if next_page != 'end' %}
+  <a class="pagination__next" href="feed?page={{ next_page }}">Next page{{ next_page }}</a>
+{% else %}
+    <a class="pagination__next" href="feed">Next page{{ next_page }}</a>
+{% endif %}
+{% if prev_page != 'start' %}
+  <a class="pagination__prev" href="feed?page={{ prev_page }}">Prev page{{ prev_page }}</a>
+{% endif %}
+</p>
