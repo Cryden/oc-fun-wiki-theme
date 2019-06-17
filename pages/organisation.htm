@@ -26,6 +26,7 @@ function onStart()
 
     // SEO title
     $this['page_title'] = $this['record']->title;
+    $this['page_description'] = $this['company']->description;
 
     // Shema.org properties
     // $this['shema_type'] = "person/shema";
@@ -33,7 +34,7 @@ function onStart()
     // og_meta properties
     $this['og_meta'] = [
         "title" => $this['record']->title,
-        "description" => $this['company']->description,
+        "description" => $this['page_description'] ,
         "image" => Url::to('storage/app/media',$this['company']->logo),
         "type" => '',
         "url" => Request::url(),

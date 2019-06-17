@@ -40,7 +40,7 @@ $this['page_description'] = $this['universe']->description;
 // og_meta properties
 $this['og_meta'] = [
 "title" => $this['record']->title,
-"description" => $this['universe']->description,
+"description" => $this['page_description'],
 "image" => Url::to('storage/app/media',$this['universe']->cover),
 "type" => '',
 "url" => Request::url(),
