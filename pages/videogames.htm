@@ -1,0 +1,83 @@
+;;
+
+title = "videogames"
+url = "/:universe/videogames"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Content as Content;
+use Fw\Backend\Models\Category as Category;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "right-sidebar";
+
+    $this['records'] = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')->get();
+
+    // $this['universe'] = Category::where(['title' => 'videogames', 'parent_id' => $universe_category])->first()->children()->get();
+    // dump($universe_category);
+
+    // $this['records'] = Content::with(['contentable' => function ($query) {
+    //         $query->where('universe', 'published');
+    // }])->where(['contentable_type' => 'videogame', 'status' => 'published'])->orderBy('title', 'asc')->get();
+
+    $this['page_title'] = "Видеоигры";
+
+    $this['universe'] = $this->param('universe');
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put content %}
+
+{% set last_char = '' %}
+{% for record in records %}
+
+{% if record.category.title == '' %}
+    {% set series = 'Вне серии' %}
+{% else %}
+    {% set series = record.category.title %}
+{% endif %}
+
+{% set this_char = series %}
+{% if this_char != last_char %}
+{% if last_char != '' %}
+</div>
+{% endif %}
+{% set last_char = this_char%}
+<h2> {{ this_char }} </h2>
+<div class="card_list">
+    {% endif %}
+    <div class="card-item">
+        <div class="card">
+            <a href="{{record.permalink }}">
+                <div class="card__image">
+                    <img src="{{ record.contentable.cover.path }}" alt="{{ record.title }}" />
+                </div>
+                <div class="card__content">
+                
+                    
+                    <h4>{{ record.title }}</h4>
+                    <div class="h4-subtitle"> {{ record.title_ru }} </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endput %}
+
+{% put sidebar_top %}
+{% endput %}
+
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
