@@ -1,0 +1,105 @@
+;;
+
+title = "videogame"
+url = "/:universe/videogames/:slug"
+layout = "default"
+is_hidden = 0
+
+==
+
+use Fw\Backend\Models\Content;
+
+function onStart()
+{
+    // Template
+    $this['template'] = "left-sidebar";
+
+    $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
+    
+    $this['page_title'] = "Видеоигры | ".$this['record']->contentable->universe->title;
+}
+
+==
+{##}
+
+{% partial 'layout/page-title' %}
+
+{% put header_content %}
+    <div class="person__title">
+        <h1> {{ record.title }} </h1>
+        <div class="subtitle">
+            {% if record.contentable.title_ru is not empty %}
+                {{ record.contentable.title_ru }}
+            {% endif %}
+        </div>
+    </div>
+{% endput %}
+
+{% put sidebar_top %}
+    <div class="person__photo">
+        <img src="{{ record.contentable.cover.path }}" />
+    </div>
+{% endput %}
+
+{% put content %}
+    <div class="person__info">
+        <div class="person-info">
+            {% if record.category is not empty %}
+                <div class="infostring infostring-light">Серия:
+                    {{ record.category.title }} Номер в серии: {{ record.contentable.number_in_series }}
+                </div>
+            {% endif %}
+            {% if record.contentable.created_data is not empty %}
+                <div class="infostring infostring-light">Дата выхода:
+                    {{record.contentable.created_data }}
+                </div>
+            {% endif %}
+            {% if record.contentable.platform is not empty %}
+                <div class="infostring infostring-light">Платформы:
+                    {% for platform in record.contentable.platform %}
+                        {{ platform.title }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if record.contentable.developer is not empty %}
+                <div class="infostring infostring-light">Разработчик:
+                    {% for personrole in record.contentable.developer %}
+                        <a href="{{ personrole.content.permalink }}">
+                            {{ personrole.title }}{% if not loop.last %}, {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if record.contentable.publisher is not empty %}
+                <div class="infostring infostring-light">Издатель:
+                    {% for personrole in record.contentable.publisher %}
+                        <a href="{{ personrole.content.permalink }}">
+                            {{ personrole.title }}{% if not loop.last %}, {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if record.contentable.genres is not empty %}
+                <div class="infostring infostring-light">Жанр:
+                    {% for genres in record.contentable.genres %}
+                        {{ genres.title }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="person__description">
+        <h2> Аннотация </h2>
+        {{ record.contentable.description|raw }}
+    </div>
+{% endput %}
+
+{% put sidebar_bottom %}
+    {% partial 'widgets/social-share-button' %}
+    {% partial 'widgets/advertisment' %}
+{% endput %}
+
+{% put aside_content %}
+    {% partial 'widgets/disqus' %}
+{% endput %}
