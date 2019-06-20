@@ -61,7 +61,7 @@ function onStart()
                 </a>
                 <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
-        {% case 'videogames' %}
+        {% case 'videogame' %}
             <img src="{{ record.contentable.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             <div class="news">
                 <div class="news__date"> {{ record.created_at|ru_date }}</div>
