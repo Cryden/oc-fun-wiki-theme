@@ -16,7 +16,7 @@ function onStart()
 
     $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
     
-    $this['page_title'] = "Видеоигры | ".$this['record']->contentable->universe->title;
+    $this['page_title'] = $this['record']->title." | Видеоигры | ".$this['record']->contentable->universe->title;
 }
 
 ==
@@ -51,7 +51,7 @@ function onStart()
             {% endif %}
             {% if record.contentable.created_data is not empty %}
                 <div class="infostring infostring-light">Дата выхода:
-                    {{record.contentable.created_data }}
+                    {{record.contentable.created_data|ru_date }}
                 </div>
             {% endif %}
             {% if record.contentable.platform is not empty %}
