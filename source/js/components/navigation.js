@@ -1,8 +1,8 @@
 function menu_display() {
     var display_menu = true;
-    console.log('menu display init');
+    // console.log('menu display init');
     $('.close_btn, .overlay, .burger').click(function() {
-        console.log('click');
+        // console.log('click');
         if (display_menu === false) {
             $("header").animate({
                 left: "-=320",
@@ -23,7 +23,7 @@ function menu_display() {
     });
 
     $('.shadow').click(function() {
-        console.log('click');
+        // console.log('click');
         if (display_menu === false) {
             $("header").animate({
                 left: "-=320",

@@ -1,3 +1,5 @@
+;;
+
 ==
 use Fw\Backend\Models\News as News;
 use Fw\Backend\Models\Content as Content;
@@ -51,8 +53,6 @@ function onStart()
 <p class="pagination">
 {% if next_page != 'end' %}
   <a class="pagination__next" href="/?page={{ next_page }}">Next page{{ next_page }}</a>
-{% else %}
-    <a class="pagination__next" href="/">Next page{{ next_page }}</a>
 {% endif %}
 {% if prev_page != 'start' %}
   <a class="pagination__prev" href="/?page={{ prev_page }}">Prev page{{ prev_page }}</a>

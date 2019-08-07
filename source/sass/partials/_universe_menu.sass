@@ -47,8 +47,11 @@
         padding: 0 15px
 
     ul 
-        display: flex
-        justify-content: space-between
+        +default
+            display: flex
+            justify-content: space-between
+        +tablet
+            justify-content: flex-start
     a 
         color: white
         height: 40px

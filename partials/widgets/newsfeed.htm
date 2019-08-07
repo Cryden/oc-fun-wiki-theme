@@ -14,7 +14,7 @@ function onStart()
 <div class="grid">
 <div class="grid-sizer"></div>
 <div class="gutter-sizer"></div>
-    {% partial "widgets/newsfeed_page" pagination=pagination %}
+    {% partial "widgets/newsfeed_page" %}
 </div>
 
 <div class="page-load-status">
@@ -26,38 +26,41 @@ function onStart()
 
 {% put scripts %}
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
 
-    var grid = document.querySelector('.grid');
-    var iso = new Isotope( grid, {
-        masonry: {
-            columnWidth: '.grid-sizer',
-            gutter: '.gutter-sizer'
-        },
-        itemSelector: '.grid-item'
+        var grid = document.querySelector('.grid');
+        var iso = new Isotope( grid, {
+            masonry: {
+                columnWidth: '.grid-sizer',
+                gutter: '.gutter-sizer'
+            },
+            itemSelector: '.grid-item'
+        });
+
+        imagesLoaded(grid).on( 'progress', function() {
+            iso.layout();
+        });
+
+        InfiniteScroll.imagesLoaded = imagesLoaded;
+
+        function getPenPath() {
+            $link = (this.loadCount+2 < $last_page) ? '?page=' + this.loadCount : '';
+            return $link;
+        }
+
+        if ( document.querySelector('.pagination__next') ) {
+            var infScroll = new InfiniteScroll( grid, {
+                path: '.pagination__next',
+                checkLastPage: true,
+                append: '.grid-item',
+                outlayer: iso,
+                status: '.page-load-status',
+                history: 'push',
+                debug: false
+            });
+        }
     });
-
-    imagesLoaded(grid).on( 'progress', function() {
-        iso.layout();
-    });
-
-    InfiniteScroll.imagesLoaded = imagesLoaded;
-
-    function getPenPath() {
-        $link = (this.loadCount+2 < $last_page) ? '?page=' + this.loadCount : '';
-        return $link;
-    }
-
-    
-    var infScroll = new InfiniteScroll( grid, {
-        path: '.pagination__next',
-        append: '.grid-item',
-        outlayer: iso,
-        status: '.page-load-status',
-        history: 'push',
-        debug: true
-    });
-});
 </script>
+
 <script id="dsq-count-scr" src="//fun-wiki.disqus.com/count.js" async></script>
 {% endput %}
