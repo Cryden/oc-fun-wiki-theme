@@ -1,4 +1,4 @@
-.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before,.icon-book::before,.icon-video::before,.icon-wiki::before,.icon-glossary::before {    font-family: 'icon-font';
+.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before,.icon-book::before,.icon-video::before,.icon-wiki::before,.icon-glossary::before,.icon-search::before {    font-family: 'icon-font';
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -470,7 +470,7 @@ template {
   content: '\F103'; }
 
 .icon-vk:before {
-  content: '\F112'; }
+  content: '\F113'; }
 
 .icon-facebook:before {
   content: '\F10d'; }
@@ -485,10 +485,10 @@ template {
   content: '\F10e'; }
 
 .icon-news::before {
-  content: '\F10f'; }
+  content: '\F110'; }
 
 .icon-universe::before {
-  content: '\F113'; }
+  content: '\F114'; }
 
 .icon-person::before {
   content: '\F103'; }
@@ -503,13 +503,13 @@ template {
   content: '\F10c'; }
 
 .icon-dropdown::before {
-  content: '\F110'; }
+  content: '\F111'; }
 
 .icon-company::before {
   content: '\F102'; }
 
 .icon-comment::before {
-  content: '\F111'; }
+  content: '\F112'; }
 
 .icon-visitors::before {
   content: '\F109'; }
@@ -528,6 +528,9 @@ template {
 
 .icon-glossary::before {
   content: '\F10c'; }
+
+.icon-search::before {
+  content: '\F10f'; }
 
 a {
   text-decoration: none; }
@@ -666,6 +669,11 @@ header {
   background: white; }
   header .social_buttons {
     display: none; }
+    header .social_buttons .icon {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px; }
 
 header::-webkit-scrollbar {
   display: none; }
@@ -714,15 +722,16 @@ header::-webkit-scrollbar {
   flex-direction: row; }
 
 .main-menu__item {
-  height: 50px;
+  height: 40px;
   min-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   color: #93A4AB;
   text-decoration: none;
-  line-height: 50px;
-  font-size: 16px; }
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 200; }
 
 .main-menu__item-dropdown {
   min-width: 100%;
@@ -730,12 +739,15 @@ header::-webkit-scrollbar {
 
 .main-menu__icon {
   font-size: 20px;
-  width: 20px;
-  margin: 0 20px; }
+  width: 40px;
+  margin: 0 20px;
+  text-align: center; }
 
 .main-menu__icon-dropdown {
   font-size: 16px;
-  margin: 0 20px;
+  width: 40px;
+  text-align: center;
+  margin: 0 20px 0 0;
   color: #FB6464;
   transition: width .5s, height .5s, background-color .5s, transform .5s;
   margin-left: auto; }
@@ -764,7 +776,7 @@ header::-webkit-scrollbar {
 .main-logo {
   display: flex;
   width: 260px;
-  height: 180px;
+  height: 160px;
   z-index: 2; }
   .main-logo__logo {
     display: block;
@@ -1055,6 +1067,10 @@ footer {
     p {
       font-size: 16px;
       line-height: 24px; }
+    .main-menu__icon {
+      margin: 0 40px; }
+    .main-menu__icon-dropdown {
+      margin: 0 40px 0 auto; }
     main {
       min-height: calc(100vh - 100px); }
       main .content {
@@ -1199,7 +1215,7 @@ footer {
       left: 0 !important;
       box-shadow: 0px 0px 40px rgba(147, 164, 171, 0.1); }
       header .social_buttons {
-        margin: 0 60px;
+        margin: 0 80px;
         text-align: center;
         color: #93A4AB;
         position: fixed;
@@ -1207,8 +1223,8 @@ footer {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: 200px;
-        font-size: 20px; }
+        font-size: 20px;
+        width: 160px; }
     .mob_nav {
       display: none; }
       .main-logo__title {
