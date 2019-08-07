@@ -1,0 +1,17 @@
+<div class="universe-menu">
+    <ul>
+        <a href="{{ permalink }}" class="{{ universe_menu }}">О вселенной</a>
+        {% if games>0 %}
+            <a href="{{ permalink }}/videogames" class="{{ games_menu }}">Игры</a>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="universe-menu-mobile">
+    <ul>
+        <a href="{{ permalink }}" class="{{ universe_menu }}"><i class="main-menu__icon icon-universe"></i></a>
+        {% if games>0 %}    
+            <a href="{{ permalink }}/videogames" class="{{ games_menu }}"><i class="main-menu__icon icon-game"></i></a>
+        {% endif %}
+    </ul>
+</div>

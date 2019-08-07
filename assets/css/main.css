@@ -1,4 +1,4 @@
-.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before {    font-family: 'icon-font';
+.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before {    font-family: 'icon-font';
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -464,31 +464,31 @@ template {
   display: none; }
 
 .icon-burger:before {
-  content: '\F105'; }
+  content: '\F106'; }
 
 .icon-person:before {
   content: '\F103'; }
 
 .icon-vk:before {
-  content: '\F10f'; }
+  content: '\F110'; }
 
 .icon-facebook:before {
-  content: '\F10a'; }
-
-.icon-twitter:before {
-  content: '\F104'; }
-
-.icon-instagram:before {
-  content: '\F108'; }
-
-.icon-google:before {
   content: '\F10b'; }
 
-.icon-news::before {
+.icon-twitter:before {
+  content: '\F105'; }
+
+.icon-instagram:before {
+  content: '\F109'; }
+
+.icon-google:before {
   content: '\F10c'; }
 
+.icon-news::before {
+  content: '\F10d'; }
+
 .icon-universe::before {
-  content: '\F110'; }
+  content: '\F111'; }
 
 .icon-person::before {
   content: '\F103'; }
@@ -497,22 +497,25 @@ template {
   content: '\F101'; }
 
 .icon-info::before {
-  content: '\F107'; }
+  content: '\F108'; }
 
 .icon-in_progress::before {
-  content: '\F109'; }
+  content: '\F10a'; }
 
 .icon-dropdown::before {
-  content: '\F10d'; }
+  content: '\F10e'; }
 
 .icon-company::before {
   content: '\F102'; }
 
 .icon-comment::before {
-  content: '\F10e'; }
+  content: '\F10f'; }
 
 .icon-visitors::before {
-  content: '\F106'; }
+  content: '\F107'; }
+
+.icon-game::before {
+  content: '\F104'; }
 
 a {
   text-decoration: none; }
@@ -898,7 +901,9 @@ footer {
   .universe-cover__image {
     width: 100%; }
     .universe-cover__image img {
-      width: 100%; }
+      width: 100%;
+      height: 100vh;
+      object-fit: cover; }
   .universe-cover__shadow {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 90%);
     width: 100%;
@@ -994,7 +999,51 @@ footer {
         font-size: 14px;
         margin-left: 10px;
         line-height: 20px; }
-      @media (min-width: 426px) {
+
+.universe-menu {
+  display: none; }
+  .universe-menu ul {
+    display: inline-flex;
+    margin-left: 80px; }
+  .universe-menu a {
+    color: white;
+    font-size: 16px;
+    margin-right: 40px;
+    padding-top: 40px; }
+  .universe-menu .active {
+    border-top: 4px solid #FB6464;
+    padding-top: 36px;
+    font-weight: 400; }
+
+.sticky {
+  background: white;
+  background: linear-gradient(180deg, white 60%, rgba(255, 255, 255, 0) 100%);
+  height: 140px; }
+  .sticky a {
+    color: #506070; }
+
+.universe-menu-mobile {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background: #506070;
+  z-index: 2;
+  padding: 0 20px; }
+  .universe-menu-mobile ul {
+    display: flex; }
+  .universe-menu-mobile a {
+    color: white;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px; }
+  .universe-menu-mobile .active {
+    border-bottom: 4px solid #FB6464; }
+  .universe-menu-mobile .main-menu__icon {
+    margin: 0 auto; }
+  @media (min-width: 426px) {
     h1 {
       font-size: 24px; }
     p {
@@ -1071,7 +1120,7 @@ footer {
         right: 30px; }
 
 }
-      @media (min-width: 1024px) {
+  @media (min-width: 1024px) {
     h1 {
       heigh: 40px;
       line-height: 40px;
@@ -1115,6 +1164,7 @@ footer {
     .person__description {
       margin-bottom: 40px; }
     .universe-cover {
+      height: 100vh;
       margin-bottom: 40px; }
       .universe-cover__logo {
         right: 80px; }
@@ -1138,7 +1188,7 @@ footer {
         padding: 20px; }
 
 }
-      @media (min-width: 1440px) {
+  @media (min-width: 1440px) {
     .infostring {
       font-size: 16px; }
     header {
@@ -1167,9 +1217,20 @@ footer {
         margin-right: 60px; }
     footer {
       margin-left: 320px; }
+    .universe-menu {
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      height: 120px;
+      width: calc(100% - 320px);
+      padding-right: 40px;
+      display: flex;
+      flex-direction: row; }
+    .universe-menu-mobile {
+      display: none; }
 
 }
-      @media (max-width: 425px) {
+  @media (max-width: 425px) {
     h2 {
       font-size: 18px; }
     h3 {

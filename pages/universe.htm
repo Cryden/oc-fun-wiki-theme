@@ -8,7 +8,7 @@ is_hidden = 0
 ==
 
 use Fw\Backend\Models\Universe as Universe;
-use Fw\Backend\Models\Book as Book;
+use Fw\Backend\Models\Videogame as Videogame;
 use Fw\Backend\Models\Content;
 
 function onStart()
@@ -26,10 +26,14 @@ return \Redirect::to('404');
 };
 
 $this['universe'] = $this['record']->contentable;
-// $this['book'] = Book::whereHas('universe', function($query) {
-//     $query->where('slug', '=',  $this->param('slug'));
-// })
-// ->count();
+$this['permalink'] = $this['record']->permalink;
+
+$this['games'] = Videogame::whereHas('universe', function($query) {
+    $query->where('id', '=',  $this['universe']->id);
+})
+->count();
+
+$this['universe_menu'] = 'active';
 
 // SEO title
 $this['page_title'] = $this['record']->title;
@@ -54,6 +58,7 @@ $this['sidebar'] = "person/author/sidebar";
 ==
 {##}
 
+{% partial 'layout/universe-menu' %}
 
 <div class="universe-cover">
     <div class="universe-cover__image">
@@ -106,9 +111,10 @@ $this['sidebar'] = "person/author/sidebar";
     </div>
 
     <div class="infostring">
-        <b>Книги:</b> 
-        <a href="{{ universe }}/books">{{ book }}</a>
+        <b>Видеоигры:</b>
+        {{ games }}
     </div>
+
 </div>
 {% endput %}
 

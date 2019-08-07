@@ -27,12 +27,17 @@ function onStart()
     $this['page_title'] = "Видеоигры";
 
     $this['universe'] = $this->param('universe');
+
+    $this['permalink'] = '/'.$this->param('universe');
+
+    $this['games'] = $this['records']->count();
+
+    $this['games_menu'] = 'active';
 }
 
 ==
 {##}
-
-{% partial 'layout/page-title' %}
+{% partial 'layout/universe-menu' %}
 
 {% put content %}
 
