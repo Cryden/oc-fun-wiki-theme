@@ -1,17 +1,28 @@
 <div class="universe-menu">
     <ul>
         <a href="{{ permalink }}" class="{{ universe_menu }}">О вселенной</a>
+        <a href="{{ permalink }}/videogames" class="">Книги</a>
+        <a href="{{ permalink }}/videogames" class="">Комиксы</a>
         {% if games>0 %}
-            <a href="{{ permalink }}/videogames" class="{{ games_menu }}">Игры</a>
+            <a href="{{ permalink }}/videogames" class="{{ games_menu }}">Видеоигры</a>
         {% endif %}
+        <a href="{{ permalink }}/videogames" class="">Игры</a>
+        <a href="{{ permalink }}/videogames" class="">Фильмы</a>
+        <a href="{{ permalink }}/videogames" class="">Энциклопедия</a>
+        <a href="{{ permalink }}/videogames" class="">Глоссарий</a>
     </ul>
 </div>
 
 <div class="universe-menu-mobile">
     <ul>
         <a href="{{ permalink }}" class="{{ universe_menu }}"><i class="main-menu__icon icon-universe"></i></a>
+        <a href="{{ permalink }}/mbook" class=""><i class="main-menu__icon icon-book"></i></a>
         {% if games>0 %}    
             <a href="{{ permalink }}/videogames" class="{{ games_menu }}"><i class="main-menu__icon icon-game"></i></a>
         {% endif %}
+        
+        <a href="#" class=""><i class="main-menu__icon icon-video"></i></a>
+        <a href="#" class=""><i class="main-menu__icon icon-wiki"></i></a>
+        <a href="#" class=""><i class="main-menu__icon icon-glossary"></i></a>
     </ul>
 </div>

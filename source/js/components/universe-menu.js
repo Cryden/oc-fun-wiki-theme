@@ -10,7 +10,7 @@ if (document.querySelector(".universe-cover") == null) {
     sticky = document.querySelector(".universe-cover").offsetHeight
 }
 
-var sticky = sticky - navbar.offsetHeight-20;
+var sticky = sticky - navbar.offsetHeight;
 
 console.log(cover)
 // Get the offset position of the navbar

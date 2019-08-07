@@ -10,6 +10,8 @@
         padding-right: 40px
         display: flex
         flex-direction: row
+        background: rgb(80,96,112)
+        background: linear-gradient(180deg, rgba(80,96,112,1) 0%, rgba(80,96,112,0) 100%)
     ul 
         display: inline-flex
         margin-left: 80px
@@ -25,7 +27,7 @@
         font-weight: 400
 
 .sticky
-    +default
+    +desktop
         background: rgb(255,255,255)
         background: linear-gradient(180deg, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%)
         height: 140px
@@ -42,20 +44,20 @@
         width: 100%
         background: $color-main
         z-index: 2
-        padding: 0 20px
+        padding: 0 15px
 
     ul 
         display: flex
+        justify-content: space-between
     a 
         color: white
         height: 40px
         width: 40px
         display: flex
         align-items: center
-        margin-right: 20px
 
     .active
-        border-bottom: 4px solid $color-second
+       background: $color-second
 
     .main-menu__icon
         margin: 0 auto

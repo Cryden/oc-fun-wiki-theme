@@ -1,4 +1,4 @@
-.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before {    font-family: 'icon-font';
+.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before,.icon-book::before,.icon-video::before,.icon-wiki::before,.icon-glossary::before {    font-family: 'icon-font';
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -464,31 +464,31 @@ template {
   display: none; }
 
 .icon-burger:before {
-  content: '\F106'; }
+  content: '\F108'; }
 
 .icon-person:before {
   content: '\F103'; }
 
 .icon-vk:before {
-  content: '\F110'; }
+  content: '\F112'; }
 
 .icon-facebook:before {
-  content: '\F10b'; }
-
-.icon-twitter:before {
-  content: '\F105'; }
-
-.icon-instagram:before {
-  content: '\F109'; }
-
-.icon-google:before {
-  content: '\F10c'; }
-
-.icon-news::before {
   content: '\F10d'; }
 
+.icon-twitter:before {
+  content: '\F107'; }
+
+.icon-instagram:before {
+  content: '\F10b'; }
+
+.icon-google:before {
+  content: '\F10e'; }
+
+.icon-news::before {
+  content: '\F10f'; }
+
 .icon-universe::before {
-  content: '\F111'; }
+  content: '\F113'; }
 
 .icon-person::before {
   content: '\F103'; }
@@ -497,25 +497,37 @@ template {
   content: '\F101'; }
 
 .icon-info::before {
-  content: '\F108'; }
-
-.icon-in_progress::before {
   content: '\F10a'; }
 
+.icon-in_progress::before {
+  content: '\F10c'; }
+
 .icon-dropdown::before {
-  content: '\F10e'; }
+  content: '\F110'; }
 
 .icon-company::before {
   content: '\F102'; }
 
 .icon-comment::before {
-  content: '\F10f'; }
+  content: '\F111'; }
 
 .icon-visitors::before {
-  content: '\F107'; }
+  content: '\F109'; }
 
 .icon-game::before {
+  content: '\F106'; }
+
+.icon-book::before {
   content: '\F104'; }
+
+.icon-video::before {
+  content: '\F105'; }
+
+.icon-wiki::before {
+  content: '\F10a'; }
+
+.icon-glossary::before {
+  content: '\F10c'; }
 
 a {
   text-decoration: none; }
@@ -771,8 +783,8 @@ main {
   min-height: calc(100vh - 60px);
   padding-top: 70px; }
   main .content {
-    margin-left: 10px;
-    margin-right: 10px; }
+    margin-left: 20px;
+    margin-right: 20px; }
 
 .page__header {
   border-right: 3px solid #FB6464;
@@ -1015,12 +1027,8 @@ footer {
     padding-top: 36px;
     font-weight: 400; }
 
-.sticky {
-  background: white;
-  background: linear-gradient(180deg, white 60%, rgba(255, 255, 255, 0) 100%);
-  height: 140px; }
-  .sticky a {
-    color: #506070; }
+.sticky a {
+  color: #506070; }
 
 .universe-menu-mobile {
   position: fixed;
@@ -1029,18 +1037,18 @@ footer {
   width: 100%;
   background: #506070;
   z-index: 2;
-  padding: 0 20px; }
+  padding: 0 15px; }
   .universe-menu-mobile ul {
-    display: flex; }
+    display: flex;
+    justify-content: space-between; }
   .universe-menu-mobile a {
     color: white;
     height: 40px;
     width: 40px;
     display: flex;
-    align-items: center;
-    margin-right: 20px; }
+    align-items: center; }
   .universe-menu-mobile .active {
-    border-bottom: 4px solid #FB6464; }
+    background: #FB6464; }
   .universe-menu-mobile .main-menu__icon {
     margin: 0 auto; }
   @media (min-width: 426px) {
@@ -1225,7 +1233,13 @@ footer {
       width: calc(100% - 320px);
       padding-right: 40px;
       display: flex;
-      flex-direction: row; }
+      flex-direction: row;
+      background: #506070;
+      background: linear-gradient(180deg, #506070 0%, rgba(80, 96, 112, 0) 100%); }
+  .sticky {
+    background: white;
+    background: linear-gradient(180deg, white 60%, rgba(255, 255, 255, 0) 100%);
+    height: 140px; }
     .universe-menu-mobile {
       display: none; }
 
