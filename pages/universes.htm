@@ -12,15 +12,19 @@ use fw\Backend\Models\Content;
 
 function onStart()
 {
-$this['template'] = "right-sidebar";
+    $this['template'] = "right-sidebar";
 
-$this['page_title'] = "Вселенные";
-// $this['records'] = Universe::orderBy('name', 'asc')->get();
+    $this['page_title'] = "Вселенные";
+    // $this['records'] = Universe::orderBy('name', 'asc')->get();
 
-$this['records'] = Content::with(['contentable' => function ($query) {
-        // $query->where('status', 'published');
-}])->where(['contentable_type' => 'universe', 'status' => 'published'])->orderBy('title', 'asc')->get();
+    $this['records'] = Content::with(['contentable' => function ($query) {
+            // $query->where('status', 'published');
+    }])->where(['contentable_type' => 'universe', 'status' => 'published'])->orderBy('title', 'asc')->get();
+
+    $this['universes_menu'] = "active";
 }
+
+
 
 ==
 {##}

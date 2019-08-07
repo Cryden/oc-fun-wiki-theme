@@ -1,4 +1,4 @@
-.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before,.icon-book::before,.icon-video::before,.icon-wiki::before,.icon-glossary::before,.icon-search::before {    font-family: 'icon-font';
+.icon-burger:before,.icon-person:before,.icon-vk:before,.icon-facebook:before,.icon-twitter:before,.icon-instagram:before,.icon-google:before,.icon-news::before,.icon-universe::before,.icon-person::before,.icon-persons::before,.icon-info::before,.icon-in_progress::before,.icon-dropdown::before,.icon-company::before,.icon-comment::before,.icon-visitors::before,.icon-game::before,.icon-book::before,.icon-video::before,.icon-wiki::before,.icon-glossary::before,.icon-search::before,.icon-main::before {    font-family: 'icon-font';
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -470,7 +470,7 @@ template {
   content: '\F103'; }
 
 .icon-vk:before {
-  content: '\F113'; }
+  content: '\F114'; }
 
 .icon-facebook:before {
   content: '\F10d'; }
@@ -488,7 +488,7 @@ template {
   content: '\F110'; }
 
 .icon-universe::before {
-  content: '\F114'; }
+  content: '\F115'; }
 
 .icon-person::before {
   content: '\F103'; }
@@ -509,7 +509,7 @@ template {
   content: '\F102'; }
 
 .icon-comment::before {
-  content: '\F112'; }
+  content: '\F113'; }
 
 .icon-visitors::before {
   content: '\F109'; }
@@ -531,6 +531,9 @@ template {
 
 .icon-search::before {
   content: '\F10f'; }
+
+.icon-main::before {
+  content: '\F112'; }
 
 a {
   text-decoration: none; }
@@ -1213,7 +1216,7 @@ footer {
       font-size: 16px; }
     header {
       left: 0 !important;
-      box-shadow: 0px 0px 40px rgba(147, 164, 171, 0.1); }
+      box-shadow: 10px 0px 25px rgba(80, 96, 112, 0.1); }
       header .social_buttons {
         margin: 0 80px;
         text-align: center;
