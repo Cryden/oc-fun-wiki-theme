@@ -1,12 +1,9 @@
-;;
-
-title = "videogames"
+title = "Видеоигры"
 url = "/:universe/videogames"
 layout = "default"
 is_hidden = 0
-
 ==
-
+<?php
 use Fw\Backend\Models\Content as Content;
 use Fw\Backend\Models\Category as Category;
 
@@ -34,7 +31,7 @@ function onStart()
 
     $this['games_menu'] = 'active';
 }
-
+?>
 ==
 {##}
 {% partial 'layout/universe-menu' %}

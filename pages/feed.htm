@@ -1,11 +1,9 @@
-;;
-
-title = "feed"
+title = "Новости сайта"
 url = "/feed"
 layout = "default"
 is_hidden = 0
-
 ==
+<?php
 use Fw\Backend\Models\Content as Content;
 
 function onStart()
@@ -28,7 +26,7 @@ function onStart()
 
     $this['news_menu'] = "active";
 }
-
+?>
 ==
 {##}
 

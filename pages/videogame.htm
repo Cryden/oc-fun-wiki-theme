@@ -1,12 +1,9 @@
-;;
-
-title = "videogame"
+title = "Видеоигра"
 url = "/:universe/videogames/:slug"
 layout = "default"
 is_hidden = 0
-
 ==
-
+<?php
 use Fw\Backend\Models\Content;
 
 function onStart()
@@ -22,7 +19,7 @@ function onStart()
     $this['permalink'] = '/'.$this->param('universe');
     $this['games_menu'] = "active";
 }
-
+?>
 ==
 {##}
 {% partial 'layout/universe-menu' %}
