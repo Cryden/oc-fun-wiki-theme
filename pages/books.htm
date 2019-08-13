@@ -1,7 +1,7 @@
 ;;
 
 title = "books"
-url = "/:universe/books"
+url = "/:universe/book"
 layout = "default"
 is_hidden = 0
 
@@ -14,14 +14,12 @@ function onStart()
     // Template
     $this['template'] = "right-sidebar";
 
-    $this['records'] = Book::whereHas('universe', function($query) {
-        $query->where('slug', '=',  $this->param('universe'));
-    })
-    ->with('book_editions')
-    ->with('authors')
-    ->orderBy('number_in_series', 'asc')
-    ->orderBy('book_series_id', "ASC NULLS LAST")
-    ->get();
+    $this['records'] = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
+    ->with('category')
+    ->with('contentable')
+    ->get()
+    ->sortBy('contentable.number_in_series')
+    ->sortBy('category.title');
 
     $this['page_title'] = "Книги";
 
@@ -30,7 +28,7 @@ function onStart()
 
 ==
 {##}
-
+{% partial 'layout/universe-menu' %}
 {% partial 'layout/page-title' %}
 
 {% put content %}
@@ -38,10 +36,10 @@ function onStart()
 {% set last_char = '' %}
 {% for record in records %}
 
-{% if record.book_series.title == '' %}
+{% if record.category.title == 'books' %}
     {% set series = 'Вне серии' %}
 {% else %}
-    {% set series = record.book_series.title %}
+    {% set series = record.category.title %}
 {% endif %}
 
 {% set this_char = series %}
@@ -55,17 +53,16 @@ function onStart()
     {% endif %}
     <div class="card-item">
         <div class="card">
-            <a href="/{{universe}}/books/{{ record.slug }}">
+            <a href="{{record.permalink }}">
                 <div class="card__image">
-                    <img src="{{ record.book_editions[0].cover|media }}" alt="{{ record.name }}" />
+                    <img src="{{ record.contentable.cover.path }}" alt="{{ record.title }}" />
                 </div>
                 <div class="card__content">
-                
-                    
                     <h4>{{ record.title }}</h4>
-                    <div class="h4-subtitle"> {{ record.name_translate }} </div>
-
-                    {{ record.authors[0].title }}
+                    <div class="h4-subtitle"> {{ record.title_ru }} </div>
+                    {% for author in record.contentable.author %}
+                        <a href="{{ author.content.permalink }}"> {{ author.title }} </a>
+                    {% endfor %}
                 </div>
             </a>
         </div>
