@@ -41,7 +41,7 @@ function onStart()
 
 {% put sidebar_top %}
     <div class="person__photo">
-        <img src="{{ record.book_editions[0].cover|media }}" />
+        <img src="{{ book.book_edition[0].cover.path }}" />
     </div>
 {% endput %}
 
@@ -71,10 +71,12 @@ function onStart()
     </div>
     <div class="person__description">
         <h2> Издания </h2>
-        {% if record.book_editions is not empty %}
+        {% if book.book_edition is not empty %}
             <div class="infostring infostring-light">
-                {% for editions in record.book_editions %}
+                {% for editions in book.book_edition %}
+                    <img src="{{ editions.cover.path }}" />
                     {{ editions.title }}
+                    {{ editions.publish_date }}
                 {% endfor %}
             </div>
         {% endif %}
