@@ -14,12 +14,22 @@ function onStart()
     // Template
     $this['template'] = "right-sidebar";
 
+    $this['universe'] = $this->param('universe');
+
+
+
     $this['records'] = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
     ->with('category')
     ->with('contentable')
     ->get()
+    ->where('contentable.in_anthology', false)
     ->sortBy('contentable.number_in_series')
     ->sortBy('category.title');
+
+    // $this['record'] = fw\Backend\Models\Work::with('books')->get()->whereHas('books.universe', function($query) {
+    //     $query->where('books.universe_id', fw\Backend\Models\Content::where('permalink', 'LIKE', '%'.$this['universe'].'%')->first()->contentable->id);
+    // })->get();
+
 
     $this['page_title'] = "Книги";
 

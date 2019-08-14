@@ -1,31 +1,26 @@
 ;;
 
 title = "book"
-url = "/:universe/books/:slug"
+url = "/:universe/book/:slug"
 layout = "default"
 is_hidden = 0
 
 ==
 
-use Fw\Backend\Models\Universe as Universe;
-use \fw\Backend\Models\Book as Book;
+use \fw\Backend\Models\Content as Content;
 
 function onStart()
 {
     // Template
-    $this['template'] = "left-sidebar";
+    $this['template'] = "right-sidebar";
 
-    $this['record'] = Book::whereHas('universe', function($query) {
-        $query->where('slug', '=',  $this->param('universe'));
-    })
-    ->where('slug', '=', $this->param('slug'))
-    ->with('book_editions')
-    ->with('authors')
-    ->first();
+    $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
 
     $this['universe'] = $this->param('universe');
 
-    $this['page_title'] = "Книги | ".$this['record']->universe->name;
+    $this['page_title'] = "Книги | ".$this['record']->contentable->universe->title;
+
+    $this['book'] = $this['record']->contentable;
 }
 
 ==
@@ -37,8 +32,8 @@ function onStart()
     <div class="person__title">
         <h1> {{ record.title }} </h1>
         <div class="subtitle">
-            {% if record.book_series is not empty %}
-                {{ record.book_series.title }} # {{ record.number_in_series }}
+            {% if book.series is not empty %}
+                {{ book.series.title }} # {{ book.number_in_series }}
             {% endif %}
         </div>
     </div>
@@ -53,16 +48,16 @@ function onStart()
 {% put content %}
     <div class="person__info">
         <div class="person-info">
-            {% if record.authors is not empty %}
+            {% if book.author is not empty %}
                 <div class="infostring infostring-light">Автор:
-                    {% for personrole in record.authors %}
-                        {{ personrole.title }}{% if not loop.last %}, {% endif %}
+                    {% for person in book.author %}
+                        {{ person.title }}{% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
-            {% if record.genres is not empty %}
+            {% if book.genres is not empty %}
                 <div class="infostring infostring-light">Жанр:
-                    {% for genres in record.genres %}
+                    {% for genres in book.genres %}
                         {{ genres.title }}{% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </div>
@@ -72,7 +67,7 @@ function onStart()
 
     <div class="person__description">
         <h2> Аннотация </h2>
-        {{ record.annotations|raw }}
+        {{ book.description|raw }}
     </div>
     <div class="person__description">
         <h2> Издания </h2>
