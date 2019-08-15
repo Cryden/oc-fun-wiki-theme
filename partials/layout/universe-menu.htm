@@ -1,8 +1,9 @@
 <div class="universe-menu">
     <ul>
         <a href="{{ permalink }}" class="{{ universe_menu }}">О вселенной</a>
-        <a href="{{ permalink }}/videogames" class="">Книги</a>
-        <a href="{{ permalink }}/videogames" class="">Комиксы</a>
+        {% if books>0  %}
+            <a href="{{ permalink }}/books" class="{{ book_menu }}">Книги</a>
+        {% endif %}
         {% if games>0 %}
             <a href="{{ permalink }}/videogames" class="{{ games_menu }}">Видеоигры</a>
         {% endif %}
@@ -16,7 +17,9 @@
 <div class="universe-menu-mobile">
     <ul>
         <a href="{{ permalink }}" class="{{ universe_menu }}"><i class="main-menu__icon icon-universe"></i></a>
-        <a href="{{ permalink }}/mbook" class=""><i class="main-menu__icon icon-book"></i></a>
+        {% if books>0  %}
+            <a href="{{ permalink }}/books" class="{{ book_menu }}"><i class="main-menu__icon icon-book"></i></a>
+        {% endif %}
         {% if games>0 %}    
             <a href="{{ permalink }}/videogames" class="{{ games_menu }}"><i class="main-menu__icon icon-game"></i></a>
         {% endif %}

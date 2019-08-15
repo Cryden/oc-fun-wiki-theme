@@ -1,7 +1,7 @@
 ;;
 
 title = "book"
-url = "/:universe/book/:slug"
+url = "/:universe/books/:slug"
 layout = "default"
 is_hidden = 0
 
@@ -12,7 +12,7 @@ use \fw\Backend\Models\Content as Content;
 function onStart()
 {
     // Template
-    $this['template'] = "right-sidebar";
+    $this['template'] = "left-sidebar";
 
     $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
 
@@ -25,11 +25,17 @@ function onStart()
     $this['book_author'] = $this['book']->author[0];
 
     $this['book_title'] = $this['book']->title;
+
+    $this['book_menu'] = "active";
+
+    $this['universe'] = Fw\Backend\Models\Content::where('permalink', '=', '/' . $this->param('universe'))->first();
+    $this['books'] = 1;
+    $this['games'] = $this['universe']->videogame;
 }
 
 ==
 {##}
-
+{% partial 'layout/universe-menu' %}
 {% partial 'layout/page-title' %}
 
 {% put header_content %}
@@ -73,18 +79,29 @@ function onStart()
         <h2> Аннотация </h2>
         {{ book.description|raw }}
     </div>
-    <div class="person__description">
-        <h2> Издания </h2>
-        {% if book.book_edition is not empty %}
-            <div class="infostring infostring-light">
+
+    {% if book.book_edition is not empty %}
+        <section id="editions">
+            <h2>Издания</h2>
+            <div class="card_list">
                 {% for editions in book.book_edition %}
-                    <img src="{{ editions.cover.path }}" />
-                    {{ editions.title }}
-                    {{ editions.publish_date }}
+                <div class="card-item card">
+                    <div class="">
+                        <a href="{{ record.permalink }}{{ editions.content.permalink }}">
+                            <div class="card__image">
+                                <img src="{{ editions.cover.path|resize(530) }}" alt="{{ editions.title }}" />
+                            </div>
+                            <div class="card__content">
+                                <h4>{{ editions.publish_date }}</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
-        {% endif %}
-    </div>
+        </section>
+    {% endif %}
+
 {% endput %}
 
 {% put sidebar_bottom %}

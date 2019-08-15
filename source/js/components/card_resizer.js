@@ -11,10 +11,23 @@ window.addEventListener('resize', function () {
 
 function card_resize() {
   list_width = ($('.card_list').width());
-  max_width = 300;
-  min_width = 250;
+  
+  max_width = 400;
+  min_width = 150;
+
+  if (document.getElementById('grid') == null) {
+    columns = Math.floor(list_width / max_width);
+  } else {
+    columns = document.getElementById('grid').dataset.columns;
+  }
+
+  if (list_width < 400) {
+    min_width = 300;
+  }
+
   column_min = Math.floor(list_width / max_width) + 1;
-  column_max = Math.floor(list_width / min_width)
+  column_max = columns;
+  
   if (column_min < column_max) {
     column_min = column_max
   }

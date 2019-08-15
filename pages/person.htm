@@ -110,10 +110,10 @@ function onStart()
     {% if person.universes is not empty %}
         <section id="universe">
             <h2>Вселенные</h2>
-            <div class="card_list">
+            <div class="card_list" id="grid" data-columns="3">
                 {% for universe in person.universes %}
-                <div class="card-item card">
-                    <div class="">
+                <div class="card-item">
+                    <div class="card">
                         <a href="{{ universe.content.permalink }}">
                             <div class="card__image">
                                 <img src="{{ universe.cover|media|resize(530) }}" alt="{{ universe.content.title }}" />

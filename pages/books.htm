@@ -1,7 +1,7 @@
 ;;
 
 title = "books"
-url = "/:universe/book"
+url = "/:universe/books"
 layout = "default"
 is_hidden = 0
 
@@ -14,26 +14,35 @@ function onStart()
     // Template
     $this['template'] = "right-sidebar";
 
-    $this['universe'] = $this->param('universe');
-
-
-
+    // DB Query
     $this['records'] = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
-    ->with('category')
-    ->with('contentable')
-    ->get()
-    ->where('contentable.in_anthology', false)
-    ->sortBy('contentable.number_in_series')
-    ->sortBy('category.title');
+        ->with('category')
+        ->with('contentable')
+        ->get()
+        ->where('contentable.in_anthology', false)
+        ->sortBy('contentable.number_in_series')
+        ->sortBy('category.title');
 
-    // $this['record'] = fw\Backend\Models\Work::with('books')->get()->whereHas('books.universe', function($query) {
-    //     $query->where('books.universe_id', fw\Backend\Models\Content::where('permalink', 'LIKE', '%'.$this['universe'].'%')->first()->contentable->id);
-    // })->get();
+    $this['universe'] = Fw\Backend\Models\Content::where('permalink', '=', '/' . $this->param('universe'))->first();
+    $this['books'] = $this['universe']->book;
+    $this['games'] = $this['universe']->videogame;
+    
+    // SEO title
+    $this['page_title'] = "Книги | ".$this['universe']->title;
+    $this['page_description'] = "Книги по вселенной ".$this['universe']->title;
 
+    // Universe menu marker
+    $this['book_menu'] = "active";
+    $this['books'] = $this['records']->count();
+    $this['permalink'] = '/'.$this->param('universe');
 
-    $this['page_title'] = "Книги";
-
-    $this['universe'] = $this->param('universe');
+    // og_meta properties
+    $this['og_meta'] = [
+        "title" => $this['page_title'],
+        "description" => $this['page_description'],
+        "image" => Url::to('themes/fun-wiki/assets/images/alpha.jpg'),
+        "url" => Request::url(),
+    ];
 }
 
 ==
@@ -43,42 +52,42 @@ function onStart()
 
 {% put content %}
 
-{% set last_char = '' %}
-{% for record in records %}
+    {% set last_char = '' %}
+    {% for record in records %}
 
-{% if record.category.title == 'books' %}
-    {% set series = 'Вне серии' %}
-{% else %}
-    {% set series = record.category.title %}
-{% endif %}
+        {% if record.category.title == 'books' %}
+            {% set series = 'Вне серии' %}
+        {% else %}
+            {% set series = record.category.title %}
+        {% endif %}
 
-{% set this_char = series %}
-{% if this_char != last_char %}
-{% if last_char != '' %}
-</div>
-{% endif %}
-{% set last_char = this_char%}
-<h2> {{ this_char }} </h2>
-<div class="card_list">
-    {% endif %}
-    <div class="card-item">
-        <div class="card">
-            <a href="{{record.permalink }}">
-                <div class="card__image">
-                    <img src="{{ record.contentable.book_edition[0].cover.path }}" alt="{{ record.title }}" />
+        {% set this_char = series %}
+        {% if this_char != last_char %}
+            {% if last_char != '' %}
                 </div>
-                <div class="card__content">
-                    <h4>{{ record.title }}</h4>
-                    <div class="h4-subtitle"> {{ record.title_ru }} </div>
-                    {% for author in record.contentable.author %}
-                        <a href="{{ author.content.permalink }}"> {{ author.title }} </a>
-                    {% endfor %}
+            {% endif %}
+            {% set last_char = this_char%}
+            <h2> {{ this_char }} </h2>
+            <div id="grid" data-columns="5" class="card_list">
+        {% endif %}
+                <div class="card-item">
+                    <div class="card">
+                        <a href="{{record.permalink }}">
+                            <div class="card__image">
+                                <img src="{{ record.contentable.book_edition[0].cover.path }}" alt="{{ record.title }}" />
+                            </div>
+                            <div class="card__content">
+                                <h4>{{ record.title }}</h4>
+                                <div class="h4-subtitle"> {{ record.title_ru }} </div>
+                                {% for author in record.contentable.author %}
+                                    <a href="{{ author.content.permalink }}"> {{ author.title }} </a>
+                                {% endfor %}
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
-        </div>
-    </div>
     {% endfor %}
-</div>
+    </div>
 
 {% endput %}
 
