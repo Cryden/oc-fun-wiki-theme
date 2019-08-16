@@ -9,16 +9,28 @@ use fw\Backend\Models\Content;
 
 function onStart()
 {
+    // Template
     $this['template'] = "right-sidebar";
 
+    // DB Query
+    $this['records'] = Content::where(['contentable_type' => 'universe', 'status' => 'published'])
+        ->orderBy('title', 'asc')
+        ->get();
+
+    // SEO title
     $this['page_title'] = "Вселенные";
-    // $this['records'] = Universe::orderBy('name', 'asc')->get();
+    $this['page_description'] = "Список фантастических вселенных" ;
 
-    $this['records'] = Content::with(['contentable' => function ($query) {
-            // $query->where('status', 'published');
-    }])->where(['contentable_type' => 'universe', 'status' => 'published'])->orderBy('title', 'asc')->get();
-
+    // Main menu marker
     $this['universes_menu'] = "active";
+
+    // og_meta properties
+    $this['og_meta'] = [
+        "title" => $this['page_title'],
+        "description" => $this['page_description'],
+        "image" => Url::to('themes/fun-wiki/assets/images/alpha.jpg'),
+        "url" => Request::url(),
+    ];
 }
 ?>
 ==

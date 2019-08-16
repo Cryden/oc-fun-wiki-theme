@@ -11,13 +11,31 @@ function onStart()
     // Template
     $this['template'] = "left-sidebar";
 
-    $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
-    
-    $this['page_title'] = $this['record']->title." | Видеоигры | ".$this['record']->contentable->universe->title;
+    // DB Query
+    $this['universe'] = \Fw\Backend\Models\Content::where('permalink', '/' . $this->param('universe'))
+        ->first()
+        ->contentable;
+        
+    $this['books'] = $this['universe']->book;
+    $this['games'] = $this['universe']->videogame;
 
-    $this['games'] = 1;
-    $this['permalink'] = '/'.$this->param('universe');
+    $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
+
+    // SEO title
+    $this['page_title'] = $this['record']->title." | Видеоигры | ".$this['universe']->title;
+    $this['page_description'] = $this['record']->description; // Add description
+
+    // Universe menu marker
     $this['games_menu'] = "active";
+    $this['permalink'] = '/'.$this->param('universe');
+
+    // og_meta properties
+    $this['og_meta'] = [
+        "title" => $this['page_title'],
+        "description" => $this['page_description'],
+        "image" => $this['record']->contentable->cover->path,
+        "url" => Request::url()
+    ];
 }
 ?>
 ==

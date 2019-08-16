@@ -1,53 +1,47 @@
 title = "Вселенная"
-url = "/:slug"
+url = "/:universe"
 layout = "default"
 is_hidden = 0
 ==
 <?php
-use Fw\Backend\Models\Universe as Universe;
-use Fw\Backend\Models\Videogame as Videogame;
-use Fw\Backend\Models\Work as Work;
 use Fw\Backend\Models\Content;
 
 function onStart()
 {
-// Template
-$this['template'] = "right-sidebar";
-
-// Get record
+    // Template
+    $this['template'] = "right-sidebar";
 
 
-$this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
+    // DB Query
+    $this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
+    
+    $this['universe'] = $this['record']->contentable;
+    $this['books'] = $this['universe']->book;
+    $this['games'] = $this['universe']->videogame;
 
-if ($this['record'] == null) {
-return \Redirect::to('404');
-};
+    if ($this['record'] == null) {
+        return \Redirect::to('404');
+    };
 
-$this['universe'] = $this['record']->contentable;
-$this['permalink'] = $this['record']->permalink;
+    // SEO title
+    $this['page_title'] = $this['universe']->title;
+    $this['page_description'] =  $this['universe']->description; // Add description
 
-$this['books'] = $this['universe']->book;
-$this['games'] = $this['universe']->videogame;
+    // Universe menu marker
+    $this['universe_menu'] = "active";
+    $this['permalink'] = '/'.$this->param('universe');
 
-$this['universe_menu'] = 'active';
+    // og_meta properties
+    $this['og_meta'] = [
+        "title" => $this['page_title'],
+        "description" => $this['page_description'],
+        "image" => Url::to('storage/app/media',$this['universe']->cover),
+        "type" => '',
+        "url" => Request::url(),
+    ];
 
-// SEO title
-$this['page_title'] = $this['record']->title;
-$this['page_description'] = $this['universe']->description;
-// Shema.org properties
-//$this['shema_type'] = "person/shema";
-
-// og_meta properties
-$this['og_meta'] = [
-"title" => $this['record']->title,
-"description" => $this['page_description'],
-"image" => Url::to('storage/app/media',$this['universe']->cover),
-"type" => '',
-"url" => Request::url(),
-];
-
-// Sidebar
-$this['sidebar'] = "person/author/sidebar";
+    // Sidebar
+    $this['sidebar'] = "person/author/sidebar";
 
 }
 ?>

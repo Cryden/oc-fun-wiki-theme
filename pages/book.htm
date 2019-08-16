@@ -14,23 +14,32 @@ function onStart()
     // Template
     $this['template'] = "left-sidebar";
 
+    // DB Query
+    $this['universe'] = \Fw\Backend\Models\Content::where('permalink', '/' . $this->param('universe'))
+        ->first()
+        ->contentable;
+        
+    $this['books'] = $this['universe']->book;
+    $this['games'] = $this['universe']->videogame;
+
     $this['record'] = Content::where('permalink', $_SERVER['REQUEST_URI'])->first();
-
-    $this['universe'] = $this->param('universe');
-
-    $this['page_title'] = "Книги | ".$this['record']->contentable->universe->title;
-
     $this['book'] = $this['record']->contentable;
 
-    $this['book_author'] = $this['book']->author[0];
+    // SEO title
+    $this['page_title'] = $this['record']->title." | Книги | ".$this['universe']->title;
+    $this['page_description'] = $this['record']->title; // Add description
 
-    $this['book_title'] = $this['book']->title;
-
+    // Universe menu marker
     $this['book_menu'] = "active";
+    $this['permalink'] = '/'.$this->param('universe');
 
-    $this['universe'] = Fw\Backend\Models\Content::where('permalink', '=', '/' . $this->param('universe'))->first();
-    $this['books'] = 1;
-    $this['games'] = $this['universe']->videogame;
+    // og_meta properties
+    $this['og_meta'] = [
+        "title" => $this['page_title'],
+        "description" => $this['page_description'],
+        "image" => $this['book']->book_edition[0]->cover->path,
+        "url" => Request::url()
+    ];
 }
 
 ==

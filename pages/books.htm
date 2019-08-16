@@ -15,7 +15,14 @@ function onStart()
     $this['template'] = "right-sidebar";
 
     // DB Query
-    $this['records'] = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
+    $this['universe'] = \Fw\Backend\Models\Content::where('permalink', '/' . $this->param('universe'))
+        ->first()
+        ->contentable;
+
+    $this['books'] = $this['universe']->book;
+    $this['games'] = $this['universe']->videogame;
+
+    $this['records']  = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
         ->with('category')
         ->with('contentable')
         ->get()
@@ -23,17 +30,12 @@ function onStart()
         ->sortBy('contentable.number_in_series')
         ->sortBy('category.title');
 
-    $this['universe'] = Fw\Backend\Models\Content::where('permalink', '=', '/' . $this->param('universe'))->first();
-    $this['books'] = $this['universe']->book;
-    $this['games'] = $this['universe']->videogame;
-    
     // SEO title
     $this['page_title'] = "Книги | ".$this['universe']->title;
     $this['page_description'] = "Книги по вселенной ".$this['universe']->title;
 
     // Universe menu marker
     $this['book_menu'] = "active";
-    $this['books'] = $this['records']->count();
     $this['permalink'] = '/'.$this->param('universe');
 
     // og_meta properties
