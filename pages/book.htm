@@ -37,7 +37,7 @@ function onStart()
     $this['og_meta'] = [
         "title" => $this['page_title'],
         "description" => $this['page_description'],
-        "image" => $this['book']->book_edition[0]->cover->path,
+        "image" => $this['book']->cover->path,
         "url" => Request::url()
     ];
 }
