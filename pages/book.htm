@@ -60,7 +60,7 @@ function onStart()
 
 {% put sidebar_top %}
     <div class="person__photo">
-        <img src="{{ book.cover.path }}" />
+        <img src="{{ book.cover.path|resize(530) }}" />
     </div>
 {% endput %}
 
