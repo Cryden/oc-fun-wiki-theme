@@ -86,7 +86,7 @@ function onStart()
 
     <div class="person__description">
         <h2> Аннотация </h2>
-        {{ book.description|raw }}
+        <p>{{ book.description|raw }}</p>
     </div>
 
     {% if book.book_edition is not empty %}

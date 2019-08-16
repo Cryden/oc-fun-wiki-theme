@@ -7,10 +7,18 @@
         {% if games>0 %}
             <a href="{{ permalink }}/videogames" class="{{ games_menu }}">Видеоигры</a>
         {% endif %}
-        <a href="{{ permalink }}/videogames" class="">Игры</a>
-        <a href="{{ permalink }}/videogames" class="">Фильмы</a>
-        <a href="{{ permalink }}/videogames" class="">Энциклопедия</a>
-        <a href="{{ permalink }}/videogames" class="">Глоссарий</a>
+        {% if tabletopgoames>0 %}
+            <a href="{{ permalink }}/games" class="{{ tabletopgames_menu }}">Игры</a>
+        {% endif %}
+        {% if movies>0 %}
+            <a href="{{ permalink }}/movies" class="{{ movies_menu }}">Фильмы</a>
+        {% endif %}
+        {% if wiki>0 %}
+            <a href="{{ permalink }}/wiki" class="{{ wiki_menu }}">Энциклопедия</a>
+        {% endif %}
+        {% if glossary>0 %}
+            <a href="{{ permalink }}/glossary" class="{{ glossary_menu }}">Глоссарий</a>
+        {% endif %}
     </ul>
 </div>
 
@@ -23,9 +31,14 @@
         {% if games>0 %}    
             <a href="{{ permalink }}/videogames" class="{{ games_menu }}"><i class="main-menu__icon icon-game"></i></a>
         {% endif %}
-        
-        <a href="#" class=""><i class="main-menu__icon icon-video"></i></a>
-        <a href="#" class=""><i class="main-menu__icon icon-wiki"></i></a>
-        <a href="#" class=""><i class="main-menu__icon icon-glossary"></i></a>
+        {% if movies>0 %}
+            <a href="{{ permalink }}/movies" class="{{ movies_menu }}"><i class="main-menu__icon icon-video"></i></a>
+        {% endif %}
+        {% if wiki>0 %}
+            <a href="{{ permalink }}/wiki" class="{{ wiki_menu }}"><i class="main-menu__icon icon-wiki"></i></a>
+        {% endif %}
+        {% if glossary>0 %}
+            <a href="{{ permalink }}/glossary" class="{{ glossary_menu }}"><i class="main-menu__icon icon-glossary"></i></a>
+        {% endif %}
     </ul>
 </div>
