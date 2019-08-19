@@ -14,14 +14,16 @@ function onStart()
 
     // DB Query
     $this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
-    
-    $this['universe'] = $this['record']->contentable;
-    $this['books'] = $this['universe']->book;
-    $this['games'] = $this['universe']->videogame;
 
     if ($this['record'] == null) {
         return \Redirect::to('404');
     };
+
+    $this['universe'] = $this['record']->contentable;
+    $this['books'] = $this['universe']->book;
+    $this['games'] = $this['universe']->videogame;
+
+
 
     // SEO title
     $this['page_title'] = $this['universe']->title;
