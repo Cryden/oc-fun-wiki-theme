@@ -32,8 +32,6 @@ function onStart()
         ->orderBy('cat_title')
         ->get();
 
-    dump($this['records']);
-
     // SEO title
     $this['page_title'] = "Книги | ".$this['universe']->title;
     $this['page_description'] = "Книги по вселенной ".$this['universe']->title;
