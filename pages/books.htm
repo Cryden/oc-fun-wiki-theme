@@ -27,10 +27,8 @@ function onStart()
         ->join('fw_backend_works as book', 'contentable_id', 'book.id')
         ->select('*', 'category.title as cat_title', 'book.number_in_series as nis')
         ->with('contentable')
-        ->orderByRaw("`cat_title`,`nis` ASC")
+        ->orderByRaw("if(cat_title = 'books', 1,0), `cat_title`,`nis` ASC")
         ->get();
-
-        // dump($this['records']);
 
     // SEO title
     $this['page_title'] = "Книги | ".$this['universe']->title;
