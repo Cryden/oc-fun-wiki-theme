@@ -23,12 +23,16 @@ function onStart()
     $this['games'] = $this['universe']->videogame;
 
     $this['records']  = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
-        ->with('category')
+        ->join('fw_backend_category as category', 'category_id', 'category.id')
+        ->join('fw_backend_works as book', 'contentable_id', 'book.id')
+        ->select('*', 'category.title as cat_title', 'book.number_in_series as nis')
         ->with('contentable')
-        ->get()
-        ->where('contentable.in_anthology', false)
-        ->sortBy('contentable.number_in_series')
-        ->sortBy('category.title');
+        ->orderBy('category_id')
+        ->orderBy('nis')
+        ->orderBy('cat_title')
+        ->get();
+
+    dump($this['records']);
 
     // SEO title
     $this['page_title'] = "Книги | ".$this['universe']->title;
@@ -57,10 +61,10 @@ function onStart()
     {% set last_char = '' %}
     {% for record in records %}
 
-        {% if record.category.title == 'books' %}
+        {% if record.cat_title == 'books' %}
             {% set series = 'Вне серии' %}
         {% else %}
-            {% set series = record.category.title %}
+            {% set series = record.cat_title %}
         {% endif %}
 
         {% set this_char = series %}
