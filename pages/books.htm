@@ -43,7 +43,7 @@ function onStart()
     $this['og_meta'] = [
         "title" => $this['page_title'],
         "description" => $this['page_description'],
-        "image" => Url::to('themes/fun-wiki/assets/images/alpha.jpg'),
+        "image" => Url::to('storage/app/media',$this['universe']->cover),
         "url" => Request::url(),
     ];
 }
