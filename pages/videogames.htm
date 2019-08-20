@@ -20,7 +20,17 @@ function onStart()
     $this['books'] = $this['universe']->book;
     $this['games'] = $this['universe']->videogame;
 
-    $this['records'] = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')->get();
+    $this['records']  = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
+        ->join('fw_backend_category as category', 'category_id', 'category.id')
+        ->join('fw_backend_videogames as videogames', 'contentable_id', 'videogames.id')
+        ->select('*', 'category.title as cat_title', 'videogames.number_in_series as nis')
+        ->with('contentable')
+        ->orderByRaw("if(cat_title = 'videogames', 1,0), `cat_title`,`nis` ASC")
+        ->get();
+
+    if ($this['records'] == null) {
+        return \Redirect::to('404');
+    };
 
     // SEO title
     $this['page_title'] = "Видеоигры | ".$this['universe']->title;

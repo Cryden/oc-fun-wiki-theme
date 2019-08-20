@@ -31,6 +31,10 @@ function onStart()
         ->get()
         ->where('contentable.in_anthology', false);
 
+    if ($this['records'] == null) {
+        return \Redirect::to('404');
+    };
+
     // SEO title
     $this['page_title'] = "Книги | ".$this['universe']->title;
     $this['page_description'] = "Книги по вселенной ".$this['universe']->title;
