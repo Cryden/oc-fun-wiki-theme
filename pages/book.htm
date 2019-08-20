@@ -35,7 +35,7 @@ function onStart()
 
     // og_meta properties
 
-    if ($this['book']->cover->path != null) {
+    if (isset($this['book']->cover->path)) {
         $book_cover = $this['book']->cover->path;
     } else {
         $book_cover = '';
