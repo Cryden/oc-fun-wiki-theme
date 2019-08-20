@@ -47,6 +47,9 @@ function onStart()
         "image" => $book_cover,
         "url" => Request::url()
     ];
+
+    $this['book_author'] = $this['book']->author[0]->title;
+    $this['book_title'] = $this['book']->title;
 }
 
 ==
