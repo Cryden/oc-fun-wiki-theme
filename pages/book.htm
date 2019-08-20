@@ -34,10 +34,17 @@ function onStart()
     $this['permalink'] = '/'.$this->param('universe');
 
     // og_meta properties
+
+    if ($this['book']->cover->path != null) {
+        $book_cover = $this['book']->cover->path;
+    } else {
+        $book_cover = '';
+    };
+
     $this['og_meta'] = [
         "title" => $this['page_title'],
         "description" => $this['page_description'],
-        "image" => $this['book']->cover->path,
+        "image" => $book_cover,
         "url" => Request::url()
     ];
 }
