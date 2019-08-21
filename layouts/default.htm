@@ -8,7 +8,7 @@ security = "all"
 
 function onStart()
 {
-    // dump(view());
+    $this['canonical'] = Request::url();
 }
 
 ==
@@ -23,6 +23,7 @@ function onStart()
     <title>{{ page_title }} | Энциклопедия фантастических вселенных</title>
     <meta name="description" content="{{ page_description|slice(0, 160)|striptags }}">
     <meta name="keywords" content="{{ keywords }}"> 
+    <link rel="canonical" href="{{ canonical }}"/>
     <base href="{{ '/' }}">
     {% partial "meta/verification" %}
     {% partial "meta/og_meta" %}
