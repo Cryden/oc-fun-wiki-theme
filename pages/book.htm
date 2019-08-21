@@ -27,7 +27,7 @@ function onStart()
 
     // SEO title
     $this['page_title'] = $this['record']->title." | Книги | ".$this['universe']->title;
-    $this['page_description'] = $this['record']->title; // Add description
+    $this['page_description'] = $this['record']->contentable->description; // Add description
 
     // Universe menu marker
     $this['book_menu'] = "active";

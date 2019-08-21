@@ -23,7 +23,7 @@ function onStart()
 
     // SEO title
     $this['page_title'] = $this['record']->title." | Видеоигры | ".$this['universe']->title;
-    $this['page_description'] = $this['record']->description; // Add description
+    $this['page_description'] = $this['record']->contentable->description; // Add description
 
     // Universe menu marker
     $this['games_menu'] = "active";
