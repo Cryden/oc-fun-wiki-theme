@@ -36,6 +36,8 @@ function onStart()
         "image" => $this['record']->contentable->cover->path,
         "url" => Request::url()
     ];
+
+    $this['keywords'] = $this['record']->title.', '.$this['universe']->title.', игра, видеогра';
 }
 ?>
 ==

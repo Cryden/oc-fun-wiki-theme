@@ -22,6 +22,7 @@ function onStart()
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ page_title }} | Энциклопедия фантастических вселенных</title>
     <meta name="description" content="{{ page_description|slice(0, 160)|striptags }}">
+    <meta name="keywords" content="{{ keywords }}"> 
     <base href="{{ '/' }}">
     {% partial "meta/verification" %}
     {% partial "meta/og_meta" %}

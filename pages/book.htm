@@ -50,6 +50,8 @@ function onStart()
 
     $this['book_author'] = $this['book']->author[0]->title;
     $this['book_title'] = $this['book']->title;
+
+    $this['keywords'] = $this['book_title'].', '.$this['book_author'].', '.$this['universe']->title.', Книга';
 }
 
 ==
