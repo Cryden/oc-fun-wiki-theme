@@ -7,8 +7,6 @@ is_hidden = 0
 
 ==
 
-use Fw\Backend\Models\Book as Book;
-
 function onStart()
 {
     // Template
@@ -24,7 +22,7 @@ function onStart()
 
     $this['records']  = \Fw\Backend\Models\Content::where('permalink', 'LIKE', '%' . $_SERVER['REQUEST_URI'] . '%')
         ->join('fw_backend_category as category', 'category_id', 'category.id')
-        ->join('fw_backend_works as book', 'contentable_id', 'book.id')
+        ->join('fw_backend_books as book', 'contentable_id', 'book.id')
         ->select('*', 'category.title as cat_title', 'book.number_in_series as nis')
         ->with('contentable')
         ->orderByRaw("if(cat_title = 'books', 1,0), `cat_title`,`nis` ASC")
