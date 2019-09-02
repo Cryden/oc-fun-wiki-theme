@@ -23,10 +23,6 @@ function onStart()
     $this['books'] = $this['universe']->book;
     $this['games'] = $this['universe']->videogame;
 
-    $metasetting = DB::table('fw_backend_relation_universes_universes')->where('metasetting_id', $this['universe']->id)->get()->pluck('universe_id');
-    $this['metasetting'] = \fw\Backend\Models\Universe::find($metasetting);
-    // dump($this['metasetting']);
-
     // SEO title
     $this['page_title'] = $this['universe']->title;
     $this['page_description'] =  $this['universe']->description; // Add description
@@ -97,11 +93,11 @@ function onStart()
         </section>
     {% endif %}
 
-    {% if metasetting is not empty %}
+    {% if record.contentable.metasetting is not empty %}
         <section id="universe">
             <h2>Входит в состав</h2>
             <div class="card_list" id="grid" data-columns="3">
-                {% for universe in metasetting %}
+                {% for universe in record.contentable.metasetting %}
                 <div class="card-item">
                     <div class="card">
                         <a href="{{ universe.content.permalink }}">
