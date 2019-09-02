@@ -23,6 +23,10 @@ function onStart()
     $this['books'] = $this['universe']->book;
     $this['games'] = $this['universe']->videogame;
 
+    $metasetting = DB::table('fw_backend_relation_universes_universes')->where('metasetting_id', $this['universe']->id)->get()->pluck('universe_id');
+    $this['metasetting'] = \fw\Backend\Models\Universe::find($metasetting);
+    // dump($this['metasetting']);
+
     // SEO title
     $this['page_title'] = $this['universe']->title;
     $this['page_description'] =  $this['universe']->description; // Add description
@@ -70,6 +74,51 @@ function onStart()
     <div class="universe__description">
         {{ universe.description|raw }}
     </div>
+    {% if record.contentable.metasettings is not empty %}
+        <section id="universe">
+            <h2>Метавселенные</h2>
+            <div class="card_list" id="grid" data-columns="3">
+                {% for universe in record.contentable.metasettings %}
+                <div class="card-item">
+                    <div class="card">
+                        <a href="{{ universe.content.permalink }}">
+                            <div class="card__image">
+                                <img src="{{ universe.cover|media|resize(530) }}" alt="{{ universe.content.title }}" />
+                            </div>
+                            <div class="card__content">
+                                <h4>{{ universe.content.title }}</h4>
+                                <div class="h4-subtitle"> {{ universe.name_translate }} </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {% if metasetting is not empty %}
+        <section id="universe">
+            <h2>Входит в состав</h2>
+            <div class="card_list" id="grid" data-columns="3">
+                {% for universe in metasetting %}
+                <div class="card-item">
+                    <div class="card">
+                        <a href="{{ universe.content.permalink }}">
+                            <div class="card__image">
+                                <img src="{{ universe.cover|media|resize(530) }}" alt="{{ universe.content.title }}" />
+                            </div>
+                            <div class="card__content">
+                                <h4>{{ universe.content.title }}</h4>
+                                <div class="h4-subtitle"> {{ universe.name_translate }} </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 {% endput %}
 
 {% put sidebar_top %}

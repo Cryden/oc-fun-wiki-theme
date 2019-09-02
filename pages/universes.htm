@@ -61,6 +61,9 @@ function onStart()
                 <div class="card__content">
                     <h4>{{ record.title }}</h4>
                     <div class="h4-subtitle"> {{ record.contentable.title_ru }} </div>
+                    {% if record.contentable.metasettings is not empty %}
+                        
+                    {% endif %}
                 </div>
             </a>
         </div>
