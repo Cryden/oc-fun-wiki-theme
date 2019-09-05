@@ -41,14 +41,14 @@ function onStart()
         "url" => Request::url(),
     ];
 
-    $this['visitors'] = GoogleServices::getVisitors('/'.Request::path());
+    // $this['visitors'] = GoogleServices::getVisitors('/'.Request::path());
 
 
-    if ($this['visitors'] > $this['record']->contentable->visitors) {
-        $news = \Fw\Backend\Models\News::find($this['record']->contentable->id);
-        $news->visitors = $this['visitors'];
-        $news->save();
-    }
+    // if ($this['visitors'] > $this['record']->contentable->visitors) {
+    //     $news = \Fw\Backend\Models\News::find($this['record']->contentable->id);
+    //     $news->visitors = $this['visitors'];
+    //     $news->save();
+    // }
 
     $this['news_menu'] = "active";
 
