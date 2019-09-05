@@ -70,7 +70,7 @@ function onStart()
                 </a>
                 <p>{{ record.contentable.description|raw|slice(0, 160)|striptags }}...</p>
             </div>
-        {% case 'work' %}
+        {% case 'book' %}
             {% if record.contentable.cover.path %}
                 <img src="{{ record.contentable.cover.path|resize(300) }}" alt="{{ record.title }} "/>
             {% endif %}
