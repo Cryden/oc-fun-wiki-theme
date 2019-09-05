@@ -1,12 +1,11 @@
-;;
-
 title = "book"
 url = "/:universe/books/:slug"
 layout = "default"
 is_hidden = 0
 
+[views]
 ==
-
+<?php
 use \fw\Backend\Models\Content as Content;
 
 function onStart()
@@ -53,7 +52,7 @@ function onStart()
 
     $this['keywords'] = $this['book_title'].', '.$this['book_author'].', '.$this['universe']->title.', Книга';
 }
-
+?>
 ==
 {##}
 {% partial 'layout/universe-menu' %}
@@ -133,4 +132,3 @@ function onStart()
 {% put aside_content %}
     {% partial 'widgets/disqus' %}
 {% endput %}
-
