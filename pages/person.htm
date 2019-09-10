@@ -48,7 +48,12 @@ function onStart()
 
     $this['book_author'] = $this['person']->title;
 
-    $this['keywords'] = $this['person']->title.', человек, персона';
+    $roles = '';
+    foreach ($this['person']->personroles as $role) {
+        $roles = $roles.$role->title.', ';
+    }
+
+    $this['keywords'] = $this['person']->title.', '.$roles.'человек, персона';
 
     // dump(Request::url());
 
