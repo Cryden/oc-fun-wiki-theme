@@ -100,21 +100,19 @@ function onStart()
         <p>{{ book.description|raw }}</p>
     </div>
 
-    {% if book.book_edition is not empty %}
+    {% if book.book_editions is not empty %}
         <section id="editions">
             <h2>Издания</h2>
             <div id="grid" data-columns="6" class="card_list">
-                {% for editions in book.book_edition %}
-                <div class="card-item card">
-                    <div class="">
-                        <a href="{{ record.permalink }}{{ editions.content.permalink }}">
+                {% for editions in book.book_editions %}
+                <div class="card-item">
+                    <div class="card">
                             <div class="card__image">
                                 <img src="{{ editions.cover.path|resize(530) }}" alt="{{ editions.title }}" />
                             </div>
                             <div class="card__content">
                                 <h4>{{ editions.publish_date }}</h4>
                             </div>
-                        </a>
                     </div>
                 </div>
                 {% endfor %}
