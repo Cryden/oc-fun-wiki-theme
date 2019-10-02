@@ -1,5 +1,5 @@
 title = "Новости"
-url = "/news/:slug"
+url = ":universe/news/:slug"
 layout = "default"
 is_hidden = 0
 
@@ -9,8 +9,7 @@ security = "all"
 [views]
 ==
 <?php
-use fw\Backend\Models\Content as Content;
-use \Fw\Backend\Classes\GoogleServices;
+use fw\Wiki\Models\Article as Article;
 
 function onStart()
 {
@@ -19,7 +18,7 @@ function onStart()
     $this['template'] = "right-sidebar";
 
     // Get record
-    $this['record'] = Content::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
+    $this['record'] = Article::where('permalink', '=', $_SERVER['REQUEST_URI'])->first();
 
     if ($this['record'] == null) {
         return \Redirect::to('404');
@@ -27,7 +26,7 @@ function onStart()
 
     // SEO title
     $this['page_title'] = 'Новости';
-    $this['page_description'] = $this['record']->contentable->description;
+    $this['page_description'] = $this['record']->content->description;
 
     // Shema.org properties
     // $this['shema_type'] = "shema/person";
@@ -36,7 +35,7 @@ function onStart()
     $this['og_meta'] = [
         "title" => $this['record']->title,
         "description" => $this['page_description'],
-        "image" => Url::to($this['record']->contentable->cover->path),
+        "image" => Url::to($this['record']->content->cover->path),
         "type" => '',
         "url" => Request::url(),
     ];
@@ -65,18 +64,18 @@ function onStart()
 {% endput %}
 
 {% put content %}
-    {% if record.contentable.news_type == "news" %}
+    {% if record.content.news_type == "news" %}
         <div class="news__cover">
-            <img src="{{ record.contentable.cover.path }}" alt="{{ record.title }}"/>
+            <img src="{{ record.content.image.path }}" alt="{{ record.title }}"/>
         </div>
     {% endif %}
-    {% if record.contentable.news_type == "trailer" %}
+    {% if record.content.news_type == "trailer" %}
     <div class="videoWrapper">
-        <iframe src="{{ record.contentable.link }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="{{ record.content.video_embed }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     {% endif %}
     <div class="news__description">
-        {{ record.contentable.description|raw }}
+        {{ record.content.description|raw }}
     </div>
 {% endput %}
 
